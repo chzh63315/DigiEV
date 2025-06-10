@@ -1,0 +1,19 @@
+{
+    "@context": {
+        "type": "@type",
+        "id": "@id",
+        "ngsi-ld": "https://uri.etsi.org/ngsi-ld/",
+        "fiware": "https://uri.fiware.org/ns/data-models#",
+        "schema": "https://schema.org/",
+        "EVChargingStation": "fiware:EVChargingStation",
+        "allowedVehicleType": "fiware:allowedVehicleType",
+        "availableCapacity": "fiware:availableCapacity",
+        "capacity": "fiware:capacity",
+        "dateModified": "fiware:dateModified",
+        "powerConsumption": "fiware:powerConsumption",
+        "ratedVoltage": "fiware:ratedVoltage",
+        "socketType": "fiware:socketType",
+        "stationName": "fiware:stationName",
+        "status": "fiware:status"
+    }
+}

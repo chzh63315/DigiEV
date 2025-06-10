@@ -1,0 +1,35 @@
+# 启动docker-compose服务
+docker-compose up -d
+
+# 查看运行中的容器
+docker ps
+
+# 进入指定容器
+docker exec -it <container_id> bash  # Replace with the actual ID
+
+# Use the MongoDB Shell
+Mongo
+
+# 显示所有数据库
+show dbs
+
+# 切换到指定数据库（如果不存在会自动创建）
+use database_name
+
+# 显示当前使用的数据库
+db
+
+# 删除当前数据库
+db.dropDatabase()
+
+# 显示当前数据库的所有集合
+show collections
+
+# Find the Entity
+db.entities.findOne()
+
+# 停止特定容器
+docker stop <container_name_or_id>
+
+# 停止docker-compose所有服务
+docker-compose down

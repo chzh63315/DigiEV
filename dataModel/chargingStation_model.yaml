@@ -1,0 +1,374 @@
+# =====================================
+# ChargingStation Data Model - NGSI-LD Standard
+# =====================================
+# Version: 1.0.0
+# Description: A charging station with static configuration and basic information
+
+ChargingStation:
+  description: A charging station that contains multiple charging units for electric vehicles - static configuration data
+  allOf:
+    - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+    - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/Location-Commons"
+  type: object
+  properties:
+    # NGSI-LD Required Properties
+    id:
+      anyOf:
+        - description: Identifier format of any NGSI-LD entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI-LD entity as URI
+          format: uri
+          type: string
+      description: Unique identifier of the charging station entity
+      x-ngsi:
+        type: Property
+    
+    type:
+      type: string
+      enum:
+        - ChargingStation
+      description: NGSI-LD Entity type. It must be ChargingStation
+      x-ngsi:
+        type: Property
+
+      # Standard Common Properties   
+    dateCreated:
+      description: Entity creation timestamp. This will usually be allocated by the storage platform
+      format: date-time
+      type: string
+      x-ngsi:
+        type: Property
+    
+    dateModified:
+      description: Timestamp of the last modification of the entity. This will usually be allocated by the storage platform
+      format: date-time
+      type: string
+      x-ngsi:
+        type: Property
+    
+    description:
+      description: A description of this item
+      type: string
+      x-ngsi:
+        type: Property
+    
+    # Basic Station Information
+    stationName:
+      type: string
+      description: Name of the charging station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    stationOperator:
+      type: string
+      description: Company or organization operating the charging station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    stationId:
+      type: string
+      description: External identifier or code for the station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Capacity Configuration
+    totalChargingUnits:
+      type: integer
+      minimum: 1
+      description: Total number of charging units installed in this station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+    
+    # Vehicle Types Supported
+    allowedVehicleType:
+      type: array
+      items:
+        type: string
+        enum:
+          - bicycle
+          - bus
+          - car
+          - caravan
+          - motorcycle
+          - motorscooter
+          - truck
+          - van
+      minItems: 1
+      uniqueItems: true
+      description: Vehicle type(s) which can be charged at this station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Station Type and Classification
+    stationType:
+      type: string
+      enum:
+        - public
+        - private
+        - semi-public
+        - workplace
+        - residential
+        - highway
+        - destination
+      description: Type/classification of the charging station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Technical Specifications
+    maxPowerCapacity:
+      type: number
+      minimum: 0
+      description: Maximum total power capacity of the station in kW
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+        units: kW
+    
+    ratedVoltage:
+      type: number
+      minimum: 0
+      description: The rated voltage offered by the charging station in Volts
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+        units: V
+    
+    gridConnection:
+      type: string
+      enum:
+        - lowVoltage
+        - mediumVoltage
+        - highVoltage
+        - directCurrent
+      description: Type of electrical grid connection
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Socket Types Available
+    socketType:
+      type: array
+      items:
+        type: string
+        enum:
+          - Type1_J1772
+          - Type2_Mennekes
+          - CHAdeMO
+          - CCS_Combo1
+          - CCS_Combo2
+          - Tesla_Supercharger
+          - Tesla_Destination
+          - GB_T_AC
+          - GB_T_DC
+          - Schuko
+          - CEE
+          - Caravan_Mains_Socket
+          - Wall_Euro
+          - Other
+      minItems: 1
+      uniqueItems: true
+      description: Types of charging sockets/connectors available at this station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Operating Information
+    operatingHours:
+      type: object
+      description: Standard operating hours of the charging station
+      properties:
+        openTime:
+          type: string
+          format: time
+          description: Opening time (24-hour format)
+        closeTime:
+          type: string
+          format: time
+          description: Closing time (24-hour format)
+        is24Hours:
+          type: boolean
+          description: Whether the station operates 24 hours
+        daysOfWeek:
+          type: array
+          items:
+            type: string
+            enum:
+              - Monday
+              - Tuesday
+              - Wednesday
+              - Thursday
+              - Friday
+              - Saturday
+              - Sunday
+          description: Days of the week when station is operational
+      x-ngsi:
+        type: Property
+    
+    # Amenities and Services
+    amenities:
+      type: array
+      items:
+        type: string
+        enum:
+          - parking
+          - restroom
+          - restaurant
+          - shopping
+          - wifi
+          - shelter
+          - security
+          - vending
+          - airPump
+          - carWash
+      description: Available amenities and services at the station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Payment Methods Supported
+    paymentMethods:
+      type: array
+      items:
+        type: string
+        enum:
+          - creditCard
+          - debitCard
+          - mobileApp
+          - rfidCard
+          - contactless
+          - cash
+          - subscription
+          - roaming
+      description: Accepted payment methods at the station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Network and Connectivity
+    networkProvider:
+      type: string
+      description: Charging network provider or operator
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Installation and Administrative Information
+    installationDate:
+      type: string
+      format: date
+      description: Date when the station was installed
+      x-ngsi:
+        type: Property
+    
+    commissioningDate:
+      type: string
+      format: date
+      description: Date when the station was commissioned for operation
+      x-ngsi:
+        type: Property
+    
+    manufacturer:
+      type: string
+      description: Manufacturer of the charging station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Contact Information
+    contactInformation:
+      type: object
+      description: Contact information for the station
+      properties:
+        phone:
+          type: string
+          description: Contact phone number
+        email:
+          type: string
+          format: email
+          description: Contact email address
+        website:
+          type: string
+          format: uri
+          description: Website URL
+        supportHours:
+          type: string
+          description: Support availability hours
+      x-ngsi:
+        type: Property
+    
+    # Features and Capabilities
+    reservationSupported:
+      type: boolean
+      description: Whether the station supports reservations
+      x-ngsi:
+        type: Property
+    
+    smartChargingSupported:
+      type: boolean
+      description: Whether the station supports smart charging features
+      x-ngsi:
+        type: Property
+    
+    loadBalancingSupported:
+      type: boolean
+      description: Whether the station supports load balancing
+      x-ngsi:
+        type: Property
+    
+    renewableEnergySource:
+      type: boolean
+      description: Whether the station uses renewable energy sources
+      x-ngsi:
+        type: Property
+    
+    batteryStorageIntegrated:
+      type: boolean
+      description: Whether the station has integrated battery storage
+      x-ngsi:
+        type: Property
+    
+    # Relationships to Other Entities
+    chargingUnits:
+      type: array
+      items:
+        type: string
+        format: uri
+      description: References to charging units in this station
+      x-ngsi:
+        type: Relationship
+        model: http://schema.org/URL
+    
+    stationStatus:
+      type: string
+      format: uri
+      description: Reference to real-time station status information
+      x-ngsi:
+        type: Relationship
+        model: http://schema.org/URL
+  
+  required:
+    - id
+    - type
+    - stationName
+    - totalChargingUnits
+    - allowedVehicleType
+    - socketType
+    - stationType
+    - location
+  
+  # Metadata
+  x-derived-from: "Smart Data Models - Transportation"
+  x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
+  x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
+  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingStation/schema.json"
+  x-model-tags: "NGSI-LD, EV, Charging, Transportation, Static"
+  x-version: "1.0.0"

@@ -1,0 +1,252 @@
+
+# =====================================
+# ChargingUnitStatus Data Model - NGSI-LD Standard
+# =====================================
+# Version: 1.0.0
+# Description: Real-time status and dynamic data for a charging unit
+
+ChargingUnitStatus:
+  description: 'Real-time operational status and dynamic data for a charging unit, including current status, operating parameters, and monitoring information'
+  allOf:
+    - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+  type: object
+  properties:
+    # NGSI-LD Required Properties
+    id:
+      anyOf:
+        - description: Identifier format of any NGSI entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI entity
+          format: uri
+          type: string
+      description: Unique identifier of the charging unit status entity
+      x-ngsi:
+        type: Property
+    
+    type:
+      description: NGSI Entity type. It has to be ChargingUnitStatus
+      enum:
+        - ChargingUnitStatus
+      type: string
+      x-ngsi:
+        type: Property
+    
+    # Standard Common Properties   
+    description:
+      description: A description of this item
+      type: string
+      x-ngsi:
+        type: Property
+    
+    # Reference to Static Unit
+    refChargingUnit:
+      anyOf:
+        - description: Identifier format of any NGSI entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI entity
+          format: uri
+          type: string
+      description: Reference to the charging unit this status belongs to
+      x-ngsi:
+        model: https://schema.org/URL
+        type: Relationship
+    
+    # Current Operational Status
+    unitStatus:
+      description: Current operational status of the charging unit
+      enum:
+        - available
+        - occupied
+        - reserved
+        - outOfService
+        - faulted
+        - maintenance
+        - preparing
+        - charging
+        - suspended
+        - finishing
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    
+    # Real-time Operating Data
+    operatingData:
+      description: Current operating parameters of the unit
+      properties:
+        currentPowerOutput:
+          description: Current power output in kW
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: kW
+        currentVoltage:
+          description: Current output voltage in V
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: V
+        currentCurrent:
+          description: Current output current in A
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: A
+        powerFactor:
+          description: Current power factor
+          maximum: 1
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+        efficiency:
+          description: Current operating efficiency percentage
+          maximum: 100
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: percent
+      type: object
+      x-ngsi:
+        model: https://schema.org/Object
+        type: Property
+    
+    # Current Maintenance Status
+    maintenanceStatus:
+      description: Current maintenance status and information
+      properties:
+        lastMaintenanceDate:
+          description: Date of last maintenance
+          format: date-time
+          type: string
+          x-ngsi:
+            model: https://schema.org/DateTime
+            type: Property
+        nextScheduledMaintenance:
+          description: Next scheduled maintenance date
+          format: date-time
+          type: string
+          x-ngsi:
+            model: https://schema.org/DateTime
+            type: Property
+        maintenanceMode:
+          description: Whether unit is in maintenance mode
+          type: boolean
+          x-ngsi:
+            model: https://schema.org/Boolean
+            type: Property
+        operatingHours:
+          description: Total operating hours
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: hours
+        chargingCycles:
+          description: Total number of charging cycles completed
+          minimum: 0
+          type: integer
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+      type: object
+      x-ngsi:
+        model: https://schema.org/Object
+        type: Property
+    
+    # Current Alerts
+    currentAlerts:
+      description: Current active alerts for this unit
+      items:
+        properties:
+          alertId:
+            description: Unique identifier for the alert
+            type: string
+            x-ngsi:
+              model: https://schema.org/Text
+              type: Property
+          alertType:
+            description: Type of alert
+            enum:
+              - hardwareFailure
+              - communicationError
+              - overheating
+              - powerSupplyIssue
+              - connectorFault
+              - softwareError
+              - maintenanceRequired
+              - securityBreach
+              - networkIssue
+            type: string
+            x-ngsi:
+              model: https://schema.org/Text
+              type: Property
+          severity:
+            description: Alert severity level
+            enum:
+              - low
+              - medium
+              - high
+              - critical
+            type: string
+            x-ngsi:
+              model: https://schema.org/Text
+              type: Property
+          timestamp:
+            description: When alert was generated
+            format: date-time
+            type: string
+            x-ngsi:
+              model: https://schema.org/DateTime
+              type: Property
+          description:
+            description: Human readable alert description
+            type: string
+            x-ngsi:
+              model: https://schema.org/Text
+              type: Property
+        type: object
+      type: array
+      x-ngsi:
+        model: https://schema.org/ItemList
+        type: Property
+    
+    # Timestamps
+    statusLastUpdated:
+      description: Timestamp when status was last updated
+      format: date-time
+      type: string
+      x-ngsi:
+        model: https://schema.org/DateTime
+        type: Property
+  
+  required:
+    - id
+    - type
+    - refChargingUnit
+    - unitStatus
+    - statusLastUpdated
+  
+  # Metadata
+  x-derived-from: "Smart Data Models - Transportation"
+  x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
+  x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
+  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingUnitStatus/schema.json"
+  x-model-tags: "NGSI-LD, EV, Electric Vehicle, Charging, Unit, Status, Dynamic"
+  x-version: "1.0.0"

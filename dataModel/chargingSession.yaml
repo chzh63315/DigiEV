@@ -1,0 +1,422 @@
+# =====================================
+# ChargingSession Data Model
+# =====================================
+# Version: 1.0.0
+# Description: Charging session information for electric vehicles
+
+ChargingSession:
+  description: 'A charging session represents a complete charging event for an electric vehicle, including session details, energy consumption, duration, and billing information'
+  allOf:
+    - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+  type: object
+  properties:
+    # NGSI-LD Required Properties
+    id:
+      anyOf:
+        - description: Identifier format of any NGSI entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI entity
+          format: uri
+          type: string
+      description: Unique identifier of the charging session entity
+      x-ngsi:
+        type: Property
+    
+    type:
+      description: NGSI Entity type. It has to be ChargingSession
+      enum:
+        - ChargingSession
+      type: string
+      x-ngsi:
+        type: Property
+    
+    # Standard Common Properties
+    dateCreated:
+      description: Entity creation timestamp. This will usually be allocated by the storage platform
+      format: date-time
+      type: string
+      x-ngsi:
+        type: Property
+
+    description:
+      description: A description of this item
+      type: string
+      x-ngsi:
+        type: Property
+    
+    # Relationships to Other Entities
+    refVehicle:
+      anyOf:
+        - description: Identifier format of any NGSI entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI entity
+          format: uri
+          type: string
+      description: Reference to the E-Vehicle that is being charged
+      x-ngsi:
+        model: https://schema.org/URL
+        type: Relationship
+    
+    refChargingUnit:
+      anyOf:
+        - description: Identifier format of any NGSI entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI entity
+          format: uri
+          type: string
+      description: Reference to the charging unit being used for this session
+      x-ngsi:
+        model: https://schema.org/URL
+        type: Relationship
+    
+    # Session Basic Information
+    sessionId:
+      description: External session identifier from charging management system
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    
+    sessionStatus:
+      description: Current status of the charging session
+      enum:
+        - initiated
+        - authorized
+        - started
+        - charging
+        - suspended
+        - ended
+        - completed
+        - failed
+        - cancelled
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    
+    sessionType:
+      description: Type of charging session
+      enum:
+        - AC-Level1
+        - AC-Level2
+        - DC-FastCharging
+        - wireless
+        - batterySwap
+        - bidirectional
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    
+    # Timing Information
+    sessionStartTime:
+      description: Timestamp when the charging session was initiated
+      format: date-time
+      type: string
+      x-ngsi:
+        model: https://schema.org/DateTime
+        type: Property
+    
+    sessionEndTime:
+      description: Timestamp when the charging session ended
+      format: date-time
+      type: string
+      x-ngsi:
+        model: https://schema.org/DateTime
+        type: Property
+    
+    chargingStartTime:
+      description: Timestamp when actual charging (energy transfer) began
+      format: date-time
+      type: string
+      x-ngsi:
+        model: https://schema.org/DateTime
+        type: Property
+    
+    chargingEndTime:
+      description: Timestamp when actual charging (energy transfer) ended
+      format: date-time
+      type: string
+      x-ngsi:
+        model: https://schema.org/DateTime
+        type: Property
+    
+    totalDuration:
+      description: Total session duration in minutes (from initiation to completion)
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: https://schema.org/Number
+        type: Property
+        units: minutes
+    
+    chargingDuration:
+      description: Actual charging duration in minutes (energy transfer time)
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: https://schema.org/Number
+        type: Property
+        units: minutes
+    
+    # Energy Information
+    energyDelivered:
+      description: Total energy delivered during the session in kWh
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: https://schema.org/Number
+        type: Property
+        units: kWh
+    
+    energyConsumed:
+      description: Total energy consumed from the grid during the session in kWh
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: https://schema.org/Number
+        type: Property
+        units: kWh
+    
+    averageChargingPower:
+      description: Average charging power during the session in kW
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: https://schema.org/Number
+        type: Property
+        units: kW
+    
+    maxChargingPower:
+      description: Maximum charging power reached during the session in kW
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: https://schema.org/Number
+        type: Property
+        units: kW
+    
+    chargingEfficiency:
+      description: Overall charging efficiency as percentage
+      maximum: 100
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: https://schema.org/Number
+        type: Property
+        units: percent
+    
+    # Battery Information
+    batteryStatusAtStart:
+      description: Battery status when session started
+      properties:
+        stateOfCharge:
+          description: Battery state of charge at session start (0-100)
+          maximum: 100
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: percent
+        voltage:
+          description: Battery voltage at session start in Volts
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: V
+        temperature:
+          description: Battery temperature at session start in Celsius
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: Celsius
+      type: object
+      x-ngsi:
+        model: https://schema.org/Object
+        type: Property
+    
+    batteryStatusAtEnd:
+      description: Battery status when session ended
+      properties:
+        stateOfCharge:
+          description: Battery state of charge at session end (0-100)
+          maximum: 100
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: percent
+        voltage:
+          description: Battery voltage at session end in Volts
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: V
+        temperature:
+          description: Battery temperature at session end in Celsius
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: Celsius
+      type: object
+      x-ngsi:
+        model: https://schema.org/Object
+        type: Property
+    
+    # User and Authentication Information
+    userId:
+      description: Identifier of the user who initiated the session
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    
+    authenticationMethod:
+      description: Method used to authenticate the charging session
+      enum:
+        - rfid
+        - mobileApp
+        - creditCard
+        - membership
+        - plugAndCharge
+        - qrCode
+        - nfc
+        - other
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    
+    authenticationId:
+      description: Authentication identifier (RFID tag, user ID, etc.)
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    
+    # Pricing and Billing Information
+    pricingDetails:
+      description: Pricing information for the charging session
+      properties:
+        pricePerKwh:
+          description: Price per kWh for this session
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+        parkingFee:
+          description: Parking fee for this session
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+        currency:
+          description: Currency code for pricing (ISO 4217)
+          type: string
+          x-ngsi:
+            model: https://schema.org/Text
+            type: Property
+      type: object
+      x-ngsi:
+        model: https://schema.org/Object
+        type: Property
+    
+    totalCost:
+      description: Total cost of the charging session
+      minimum: 0
+      type: number
+      x-ngsi:
+        model: https://schema.org/Number
+        type: Property
+    
+    # Technical Information
+    chargingProtocol:
+      description: Communication protocol used for charging
+      enum:
+        - IEC61851
+        - CHAdeMO
+        - CCS
+        - Tesla
+        - GB/T
+        - ISO15118
+        - OCPP
+        - other
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    
+    
+    # Session End Information
+    endReason:
+      description: Reason why the charging session ended
+      enum:
+        - completed
+        - userStopped
+        - batteryFull
+        - timeLimit
+        - powerLimit
+        - emergency
+        - error
+        - maintenance
+        - deAuthorized
+        - other
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    
+    # Session Quality and Performance
+    sessionRating:
+      description: User rating for the charging session (1-5)
+      maximum: 5
+      minimum: 1
+      type: integer
+      x-ngsi:
+        model: https://schema.org/Number
+        type: Property
+    
+    # Timestamps
+    lastUpdated:
+      description: Timestamp when session data was last updated
+      format: date-time
+      type: string
+      x-ngsi:
+        model: https://schema.org/DateTime
+        type: Property
+  
+  required:
+    - id
+    - type
+    - refVehicle
+    - refChargingUnit
+    - sessionStatus
+    - sessionStartTime
+    - lastUpdated
+  
+  # Metadata
+  x-derived-from: "Smart Data Models - Transportation"
+  x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
+  x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
+  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingSession/schema.json"
+  x-model-tags: "NGSI-LD, EV, Electric Vehicle, Charging, Session, Transportation"
+  x-version: "1.0.0"
