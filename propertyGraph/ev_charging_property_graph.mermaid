@@ -1,0 +1,66 @@
+graph TD
+    %% Static Entities
+    EV[E-Vehicle]
+    CU[ChargingUnit]
+    CS[ChargingStation]
+    
+    %% Dynamic Status Entities
+    EVS[E-VehicleStatus]
+    CUS[ChargingUnitStatus]
+    CSS[ChargingStationStatus]
+    
+    %% Session Entity
+    SESS[ChargingSession]
+    
+    %% Static-to-Dynamic Relationships
+    EV -.->|hasStatus| EVS
+    CU -.->|hasStatus| CUS
+    CS -.->|hasStatus| CSS
+    
+    %% Charging Relationships
+    EVS -->|currentChargingSession| SESS
+    CUS -->|currentSession| SESS
+    SESS -->|refVehicle| EV
+    SESS -->|refChargingUnit| CU
+    
+    %% Infrastructure Hierarchy
+    CS -->|contains| CU
+    
+    %% Cross-references
+    EVS -.->|currentChargingUnit| CU
+    CUS -.->|currentVehicle| EV
+    
+    %% Entity Properties
+    EV_PROPS["vehicleIdentificationNumber<br/>brand<br/>model<br/>batterySpecifications<br/>chargingCapabilities<br/>vehicleType"]
+    
+    EVS_PROPS["batteryStatus<br/>chargingStatus<br/>hvacStatus<br/>statusLastUpdated"]
+    
+    CU_PROPS["unitId<br/>chargingType<br/>connectorTypes<br/>maxPowerOutput<br/>powerCapabilities<br/>hardwareInfo"]
+    
+    CUS_PROPS["unitStatus<br/>operatingData<br/>maintenanceStatus<br/>currentAlerts<br/>statusLastUpdated"]
+    
+    CS_PROPS["stationId<br/>totalUnits<br/>operationalStatus<br/>location<br/>address"]
+    
+    CSS_PROPS["totalUnits<br/>availableUnits<br/>occupiedUnits<br/>currentPowerConsumption<br/>operationalStatus"]
+    
+    SESS_PROPS["sessionId<br/>sessionStatus<br/>sessionType<br/>sessionStartTime<br/>energyDelivered<br/>batteryStatusAtStart<br/>pricingDetails<br/>totalCost"]
+    
+    %% Connect properties to entities
+    EV -.-> EV_PROPS
+    EVS -.-> EVS_PROPS
+    CU -.-> CU_PROPS
+    CUS -.-> CUS_PROPS
+    CS -.-> CS_PROPS
+    CSS -.-> CSS_PROPS
+    SESS -.-> SESS_PROPS
+    
+    %% Styling
+    classDef static fill:#e1f5fe,stroke:#01579b,stroke-width:2px,color:#000
+    classDef dynamic fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px,color:#000
+    classDef session fill:#fff3e0,stroke:#ef6c00,stroke-width:2px,color:#000
+    classDef properties fill:#f3e5f5,stroke:#7b1fa2,stroke-width:1px,color:#000,font-size:10px
+    
+    class EV,CU,CS static
+    class EVS,CUS,CSS dynamic
+    class SESS session
+    class EV_PROPS,EVS_PROPS,CU_PROPS,CUS_PROPS,CS_PROPS,CSS_PROPS,SESS_PROPS properties
