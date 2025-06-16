@@ -63,7 +63,7 @@ ChargingSession:
         model: https://schema.org/URL
         type: Relationship
     
-    refChargingUnit:
+    refChargingPoint:
       anyOf:
         - description: Identifier format of any NGSI entity
           maxLength: 256
@@ -73,7 +73,7 @@ ChargingSession:
         - description: Identifier format of any NGSI entity
           format: uri
           type: string
-      description: Reference to the charging unit being used for this session
+      description: Reference to the charging point being used for this session
       x-ngsi:
         model: https://schema.org/URL
         type: Relationship
@@ -397,7 +397,7 @@ ChargingSession:
     
     # Timestamps
     lastUpdated:
-      description: Timestamp when session data was last updated
+      description: Timestamp when data was last updated
       format: date-time
       type: string
       x-ngsi:
@@ -408,7 +408,7 @@ ChargingSession:
     - id
     - type
     - refVehicle
-    - refChargingUnit
+    - refChargingPoint
     - sessionStatus
     - sessionStartTime
     - lastUpdated

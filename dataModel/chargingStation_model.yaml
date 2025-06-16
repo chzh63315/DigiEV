@@ -5,7 +5,7 @@
 # Description: A charging station with static configuration and basic information
 
 ChargingStation:
-  description: A charging station that contains multiple charging units for electric vehicles - static configuration data
+  description: A charging station that contains multiple charging points for electric vehicles - static configuration data
   allOf:
     - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
     - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/Location-Commons"
@@ -34,25 +34,27 @@ ChargingStation:
       x-ngsi:
         type: Property
 
-      # Standard Common Properties   
+    # Standard Common Properties   
     dateCreated:
       description: Entity creation timestamp. This will usually be allocated by the storage platform
       format: date-time
       type: string
       x-ngsi:
         type: Property
-    
-    dateModified:
-      description: Timestamp of the last modification of the entity. This will usually be allocated by the storage platform
-      format: date-time
-      type: string
-      x-ngsi:
-        type: Property
-    
+       
     description:
       description: A description of this item
       type: string
       x-ngsi:
+        type: Property
+
+    # Timestamps
+    lastUpdated:
+      description: Timestamp when data was last updated
+      format: date-time
+      type: string
+      x-ngsi:
+        model: https://schema.org/DateTime
         type: Property
     
     # Basic Station Information
@@ -78,10 +80,10 @@ ChargingStation:
         model: http://schema.org/Text
     
     # Capacity Configuration
-    totalChargingUnits:
+    totalChargingPoints:
       type: integer
       minimum: 1
-      description: Total number of charging units installed in this station
+      description: Total number of charging points installed in this station
       x-ngsi:
         type: Property
         model: http://schema.org/Number
@@ -337,12 +339,12 @@ ChargingStation:
         type: Property
     
     # Relationships to Other Entities
-    chargingUnits:
+    refchargingPoints:
       type: array
       items:
         type: string
         format: uri
-      description: References to charging units in this station
+      description: References to charging points in this station
       x-ngsi:
         type: Relationship
         model: http://schema.org/URL
@@ -359,7 +361,7 @@ ChargingStation:
     - id
     - type
     - stationName
-    - totalChargingUnits
+    - totalChargingPoints
     - allowedVehicleType
     - socketType
     - stationType

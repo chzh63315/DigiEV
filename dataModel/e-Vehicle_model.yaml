@@ -210,7 +210,7 @@ E-Vehicle:
         type: Property
        
     # Relationships to Charging Infrastructure
-    currentChargingSession:
+    refChargingSession:
       anyOf:
         - description: Identifier format of any NGSI entity
           maxLength: 256

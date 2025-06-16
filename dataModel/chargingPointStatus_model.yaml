@@ -1,12 +1,12 @@
 
 # =====================================
-# ChargingUnitStatus Data Model - NGSI-LD Standard
+# ChargingPointStatus Data Model - NGSI-LD Standard
 # =====================================
 # Version: 1.0.0
-# Description: Real-time status and dynamic data for a charging unit
+# Description: Real-time status and dynamic data for a charging point
 
-ChargingUnitStatus:
-  description: 'Real-time operational status and dynamic data for a charging unit, including current status, operating parameters, and monitoring information'
+ChargingPointStatus:
+  description: 'Real-time operational status and dynamic data for a charging point, including current status, operating parameters, and monitoring information'
   allOf:
     - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
   type: object
@@ -22,27 +22,34 @@ ChargingUnitStatus:
         - description: Identifier format of any NGSI entity
           format: uri
           type: string
-      description: Unique identifier of the charging unit status entity
+      description: Unique identifier of the charging point status entity
       x-ngsi:
         type: Property
     
     type:
-      description: NGSI Entity type. It has to be ChargingUnitStatus
+      description: NGSI Entity type. It has to be ChargingPointStatus
       enum:
-        - ChargingUnitStatus
+        - ChargingPointStatus
       type: string
       x-ngsi:
         type: Property
     
-    # Standard Common Properties   
+    # Standard Common Properties
+    dateCreated:
+      description: Entity creation timestamp. This will usually be allocated by the storage platform
+      format: date-time
+      type: string
+      x-ngsi:
+        type: Property
+
     description:
       description: A description of this item
       type: string
       x-ngsi:
         type: Property
     
-    # Reference to Static Unit
-    refChargingUnit:
+    # Reference to Static Point
+    refChargingPoint:
       anyOf:
         - description: Identifier format of any NGSI entity
           maxLength: 256
@@ -52,14 +59,14 @@ ChargingUnitStatus:
         - description: Identifier format of any NGSI entity
           format: uri
           type: string
-      description: Reference to the charging unit this status belongs to
+      description: Reference to the charging point this status belongs to
       x-ngsi:
         model: https://schema.org/URL
         type: Relationship
     
     # Current Operational Status
     unitStatus:
-      description: Current operational status of the charging unit
+      description: Current operational status of the charging point
       enum:
         - available
         - occupied
@@ -78,7 +85,7 @@ ChargingUnitStatus:
     
     # Real-time Operating Data
     operatingData:
-      description: Current operating parameters of the unit
+      description: Current operating parameters of the point
       properties:
         currentPowerOutput:
           description: Current power output in kW
@@ -145,7 +152,7 @@ ChargingUnitStatus:
             model: https://schema.org/DateTime
             type: Property
         maintenanceMode:
-          description: Whether unit is in maintenance mode
+          description: Whether point is in maintenance mode
           type: boolean
           x-ngsi:
             model: https://schema.org/Boolean
@@ -172,7 +179,7 @@ ChargingUnitStatus:
     
     # Current Alerts
     currentAlerts:
-      description: Current active alerts for this unit
+      description: Current active alerts for this point
       items:
         properties:
           alertId:
@@ -227,26 +234,18 @@ ChargingUnitStatus:
         model: https://schema.org/ItemList
         type: Property
     
-    # Timestamps
-    statusLastUpdated:
-      description: Timestamp when status was last updated
-      format: date-time
-      type: string
-      x-ngsi:
-        model: https://schema.org/DateTime
-        type: Property
-  
+ 
   required:
     - id
     - type
-    - refChargingUnit
+    - refChargingPoint
     - unitStatus
-    - statusLastUpdated
+    - dateCreated
   
   # Metadata
   x-derived-from: "Smart Data Models - Transportation"
   x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
   x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
-  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingUnitStatus/schema.json"
-  x-model-tags: "NGSI-LD, EV, Electric Vehicle, Charging, Unit, Status, Dynamic"
+  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingPointStatus/schema.json"
+  x-model-tags: "NGSI-LD, EV, Electric Vehicle, Charging, Point, Status, Dynamic"
   x-version: "1.0.0"

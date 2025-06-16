@@ -34,7 +34,7 @@ ChargingStationStatus:
         type: Property
     
     # Reference to Parent Station
-    chargingStation:
+    refChargingStation:
       type: string
       format: uri
       description: Reference to the charging station this status belongs to
@@ -50,19 +50,12 @@ ChargingStationStatus:
       x-ngsi:
         type: Property
     
-    dateModified:
-      description: Timestamp of the last modification of the entity. This will usually be allocated by the storage platform
-      format: date-time
-      type: string
-      x-ngsi:
-        type: Property
-    
     description:
       description: A description of this item
       type: string
       x-ngsi:
         type: Property
-    
+
     # Operational Status
     operationalStatus:
       type: string
@@ -78,51 +71,51 @@ ChargingStationStatus:
         type: Property
         model: http://schema.org/Text
     
-    # Unit Availability Information
-    totalUnits:
+    # Point Availability Information
+    totalPoints:
       type: integer
       minimum: 0
-      description: Total number of charging units in the station
+      description: Total number of charging points in the station
       x-ngsi:
         type: Property
         model: http://schema.org/Number
     
-    availableUnits:
+    availablePoints:
       type: integer
       minimum: 0
-      description: Number of currently available charging units
+      description: Number of currently available charging points
       x-ngsi:
         type: Property
         model: http://schema.org/Number
     
-    occupiedUnits:
+    occupiedPoints:
       type: integer
       minimum: 0
-      description: Number of occupied charging units
+      description: Number of occupied charging points
       x-ngsi:
         type: Property
         model: http://schema.org/Number
     
-    faultedUnits:
+    faultedPoints:
       type: integer
       minimum: 0
-      description: Number of faulted charging units
+      description: Number of faulted charging points
       x-ngsi:
         type: Property
         model: http://schema.org/Number
     
-    maintenanceUnits:
+    maintenancePoints:
       type: integer
       minimum: 0
-      description: Number of units under maintenance
+      description: Number of points under maintenance
       x-ngsi:
         type: Property
         model: http://schema.org/Number
     
-    reservedUnits:
+    reservedPoints:
       type: integer
       minimum: 0
-      description: Number of reserved charging units
+      description: Number of reserved charging points
       x-ngsi:
         type: Property
         model: http://schema.org/Number
@@ -358,7 +351,7 @@ ChargingStationStatus:
               - overheating
               - securityBreach
               - maintenanceRequired
-              - unitFailure
+              - pointFailure
               - paymentSystemDown
               - gridIssue
               - weatherAlert
@@ -400,10 +393,11 @@ ChargingStationStatus:
   required:
     - id
     - type
-    - chargingStation
-    - totalUnits
-    - availableUnits
-    - statusLastUpdated
+    - refChargingStation
+    - dateCreated    
+    - totalPoints
+    - availablePoints
+
   
   # Metadata
   x-derived-from: "Smart Data Models - Transportation"

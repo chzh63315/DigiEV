@@ -33,7 +33,14 @@ E-VehicleStatus:
       x-ngsi:
         type: Property
     
-    # Standard Common Properties   
+    # Standard Common Properties  
+    dateCreated:
+      description: Entity creation timestamp. This will usually be allocated by the storage platform
+      format: date-time
+      type: string
+      x-ngsi:
+        type: Property
+
     description:
       description: A description of this item
       type: string
@@ -69,14 +76,6 @@ E-VehicleStatus:
             model: https://schema.org/Number
             type: Property
             units: percent
-        batteryLevel:
-          description: Current battery level as percentage (0-1) for compatibility
-          maximum: 1
-          minimum: 0
-          type: number
-          x-ngsi:
-            model: https://schema.org/Number
-            type: Property
         batteryVoltage:
           description: Current battery pack voltage in Volts
           minimum: 0
@@ -136,6 +135,43 @@ E-VehicleStatus:
         model: https://schema.org/Object
         type: Property
     
+ # Range Information
+    batteryRangeStatus:
+      description: Real-time status about driving range, focused on charging/discharging scenarios
+      properties:
+        currentRange:
+          description: Current estimated driving range with present battery level in kilometers
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: km
+        rangeAtFullCharge:
+          description: Maximum driving range when battery reaches 100% SoC in kilometers
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: km
+        rangePerKwh:
+          description: Current driving range efficiency in kilometers per kWh
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: km/kWh
+          energyConsumptionRate:
+          description: Real-time energy consumption rate in kWh per 100km
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: kWh/100km
+
     # Charging Status
     chargingStatus:
       description: Current charging status and information
@@ -283,7 +319,7 @@ E-VehicleStatus:
         type: Property
     
     # Relationships to Charging Infrastructure
-    currentChargingSession:
+    refChargingSession:
       anyOf:
         - description: Identifier format of any NGSI entity
           maxLength: 256
@@ -298,7 +334,7 @@ E-VehicleStatus:
         model: https://schema.org/URL
         type: Relationship
     
-    currentChargingUnit:
+    refChargingPoint:
       anyOf:
         - description: Identifier format of any NGSI entity
           maxLength: 256
@@ -308,25 +344,18 @@ E-VehicleStatus:
         - description: Identifier format of any NGSI entity
           format: uri
           type: string
-      description: Reference to charging unit currently being used
+      description: Reference to charging point currently being used
       x-ngsi:
         model: https://schema.org/URL
         type: Relationship
-    
-    statusLastUpdated:
-      description: Timestamp when status was last updated
-      format: date-time
-      type: string
-      x-ngsi:
-        model: https://schema.org/DateTime
-        type: Property
-
+       
   required:
     - id
     - type
     - refVehicle
     - batteryStatus
-    - statusLastUpdated
+    - dateCreated
+
   
   # Metadata
   x-derived-from: "Smart Data Models - Transportation"

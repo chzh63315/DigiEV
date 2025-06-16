@@ -1,11 +1,11 @@
 # =====================================
-# ChargingUnit Data Model - NGSI-LD Standard
+# ChargingPoint Data Model - NGSI-LD Standard
 # =====================================
 # Version: 1.0.0
-# Description: Individual charging unit (charging point) static information
+# Description: Individual charging point static information
 
-ChargingUnit:
-  description: 'A charging unit represents an individual charging point within a charging station, containing static configuration and specification data'
+ChargingPoint:
+  description: 'An individual charging point within a charging station, containing static configuration and specification data'
   allOf:
     - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
   type: object
@@ -21,14 +21,14 @@ ChargingUnit:
         - description: Identifier format of any NGSI entity
           format: uri
           type: string
-      description: Unique identifier of the charging unit entity
+      description: Unique identifier of the charging point entity
       x-ngsi:
         type: Property
     
     type:
-      description: NGSI Entity type. It has to be ChargingUnit
+      description: NGSI Entity type. It has to be ChargingPoint
       enum:
-        - ChargingUnit
+        - ChargingPoint
       type: string
       x-ngsi:
         type: Property
@@ -40,20 +40,21 @@ ChargingUnit:
       type: string
       x-ngsi:
         type: Property
-    
-    dateModified:
-      description: Timestamp of the last modification of the entity. This will usually be allocated by the storage platform
-      format: date-time
-      type: string
-      x-ngsi:
-        type: Property
-    
+        
     description:
       description: A description of this item
       type: string
       x-ngsi:
         type: Property
-
+        
+    # Timestamps
+    lastUpdated:
+      description: Timestamp when data was last updated
+      format: date-time
+      type: string
+      x-ngsi:
+        model: https://schema.org/DateTime
+        type: Property
     
     # Relationship to Parent Station
     refChargingStation:
@@ -66,14 +67,14 @@ ChargingUnit:
         - description: Identifier format of any NGSI entity
           format: uri
           type: string
-      description: Reference to the charging station this unit belongs to
+      description: Reference to the charging station this point belongs to
       x-ngsi:
         model: https://schema.org/URL
         type: Relationship
     
-    # Unit Basic Information
-    unitId:
-      description: External unit identifier from charging management system
+    # Point Basic Information
+    pointId:
+      description: External point identifier from charging management system
       type: string
       x-ngsi:
         model: https://schema.org/Text
@@ -81,7 +82,7 @@ ChargingUnit:
     
     # Physical Specifications
     chargingType:
-      description: Type of charging supported by this unit
+      description: Type of charging supported by this point
       enum:
         - AC-Level1
         - AC-Level2
@@ -95,7 +96,7 @@ ChargingUnit:
         type: Property
     
     connectorTypes:
-      description: Types of connectors available on this unit
+      description: Types of connectors available on this point
       items:
         enum:
           - CCS1
@@ -115,7 +116,7 @@ ChargingUnit:
         type: Property
     
     numberOfConnectors:
-      description: Number of connectors on this unit
+      description: Number of connectors on this point
       minimum: 1
       type: integer
       x-ngsi:
@@ -123,7 +124,7 @@ ChargingUnit:
         type: Property
     
     maxPowerOutput:
-      description: Maximum power output of the unit in kW
+      description: Maximum power output of the point in kW
       minimum: 0
       type: number
       x-ngsi:
@@ -132,7 +133,7 @@ ChargingUnit:
         units: kW
     
     powerCapabilities:
-      description: Detailed power capabilities of the unit
+      description: Detailed power capabilities of the point
       properties:
         maxACPower:
           description: Maximum AC power output in kW
@@ -180,7 +181,7 @@ ChargingUnit:
         model: https://schema.org/Object
         type: Property
     
-    currentSession:
+    refSession:
       anyOf:
         - description: Identifier format of any NGSI entity
           maxLength: 256
@@ -190,12 +191,12 @@ ChargingUnit:
         - description: Identifier format of any NGSI entity
           format: uri
           type: string
-      description: Reference to current charging session if unit is in use
+      description: Reference to current charging session if point is in use
       x-ngsi:
         model: https://schema.org/URL
         type: Relationship
     
-    currentVehicle:
+    refVehicle:
       anyOf:
         - description: Identifier format of any NGSI entity
           maxLength: 256
@@ -205,14 +206,14 @@ ChargingUnit:
         - description: Identifier format of any NGSI entity
           format: uri
           type: string
-      description: Reference to vehicle currently using this unit
+      description: Reference to vehicle currently using this point
       x-ngsi:
         model: https://schema.org/URL
         type: Relationship
        
     # Communication and Connectivity 
     communicationProtocol:
-      description: Communication protocol used by the unit
+      description: Communication protocol used by the point
       enum:
         - OCPP1.6
         - OCPP2.0
@@ -241,13 +242,13 @@ ChargingUnit:
             model: https://schema.org/Text
             type: Property
         ipAddress:
-          description: IP address of the unit
+          description: IP address of the point
           type: string
           x-ngsi:
             model: https://schema.org/Text
             type: Property
         macAddress:
-          description: MAC address of the unit
+          description: MAC address of the point
           type: string
           x-ngsi:
             model: https://schema.org/Text
@@ -262,19 +263,19 @@ ChargingUnit:
       description: Hardware specifications and information
       properties:
         manufacturer:
-          description: Unit manufacturer
+          description: Point manufacturer
           type: string
           x-ngsi:
             model: https://schema.org/manufacturer
             type: Property
         model:
-          description: Unit model number
+          description: Point model number
           type: string
           x-ngsi:
             model: https://schema.org/model
             type: Property
         serialNumber:
-          description: Unit serial number
+          description: Point serial number
           type: string
           x-ngsi:
             model: https://schema.org/serialNumber
@@ -286,7 +287,7 @@ ChargingUnit:
             model: https://schema.org/softwareVersion
             type: Property
         installationDate:
-          description: Date when unit was installed
+          description: Date when point was installed
           format: date
           type: string
           x-ngsi:
@@ -316,6 +317,6 @@ ChargingUnit:
   x-derived-from: "Smart Data Models - Transportation"
   x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
   x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
-  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingUnit/schema.json"
-  x-model-tags: "NGSI-LD, EV, Electric Vehicle, Charging, Unit, Infrastructure, Static"
+  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingPoint/schema.json"
+  x-model-tags: "NGSI-LD, EV, Electric Vehicle, Charging, Point, Infrastructure, Static"
   x-version: "1.0.0"
