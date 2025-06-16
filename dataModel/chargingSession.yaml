@@ -48,7 +48,7 @@ ChargingSession:
         type: Property
     
     # Relationships to Other Entities
-    refVehicle:
+    refVehicleStatus:
       anyOf:
         - description: Identifier format of any NGSI entity
           maxLength: 256
@@ -58,7 +58,7 @@ ChargingSession:
         - description: Identifier format of any NGSI entity
           format: uri
           type: string
-      description: Reference to the E-Vehicle that is being charged
+      description: Reference to the E-Vehicle Status that is being charged
       x-ngsi:
         model: https://schema.org/URL
         type: Relationship
@@ -407,7 +407,7 @@ ChargingSession:
   required:
     - id
     - type
-    - refVehicle
+    - refVehicleStatus
     - refChargingPoint
     - sessionStatus
     - sessionStartTime

@@ -209,8 +209,8 @@ E-Vehicle:
         model: https://schema.org/Object
         type: Property
        
-    # Relationships to Charging Infrastructure
-    refChargingSession:
+    # Relationships to e-VehicleStatus
+    refVehicleStatus:
       anyOf:
         - description: Identifier format of any NGSI entity
           maxLength: 256
@@ -220,22 +220,7 @@ E-Vehicle:
         - description: Identifier format of any NGSI entity
           format: uri
           type: string
-      description: Reference to current charging session if vehicle is currently charging
-      x-ngsi:
-        model: https://schema.org/URL
-        type: Relationship
-    
-    lastChargingSession:
-      anyOf:
-        - description: Identifier format of any NGSI entity
-          maxLength: 256
-          minLength: 1
-          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
-          type: string
-        - description: Identifier format of any NGSI entity
-          format: uri
-          type: string
-      description: Reference to the last completed charging session
+      description: Reference to current VehicleS tatus
       x-ngsi:
         model: https://schema.org/URL
         type: Relationship
@@ -288,6 +273,7 @@ E-Vehicle:
     - model
     - batterySpecifications
     - chargingCapabilities
+    - refVehicleStatus
     - vehicleType
   
   # Metadata

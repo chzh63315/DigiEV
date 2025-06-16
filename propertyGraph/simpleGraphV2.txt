@@ -1,0 +1,10 @@
+ChargingStation     (1)←→(n)     ChargingPoint        (1)←→(n)   ChargingSession
+      (1)                             (1)                             (1) 
+       ↓↑                             ↑↓                              ↑↓
+      (n)                             (n)                             (n)
+ChargingStationStatus       ChargingPointStatus                 E-VehicleStatus 
+                                                                      (n)
+                                                                      ↓↑
+                                                                      (1)
+                                                                   E-Vehicle 
+                            

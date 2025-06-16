@@ -163,7 +163,7 @@ E-VehicleStatus:
             model: https://schema.org/Number
             type: Property
             units: km/kWh
-          energyConsumptionRate:
+        energyConsumptionRate:
           description: Real-time energy consumption rate in kWh per 100km
           minimum: 0
           type: number
@@ -330,21 +330,6 @@ E-VehicleStatus:
           format: uri
           type: string
       description: Reference to current charging session if vehicle is currently charging
-      x-ngsi:
-        model: https://schema.org/URL
-        type: Relationship
-    
-    refChargingPoint:
-      anyOf:
-        - description: Identifier format of any NGSI entity
-          maxLength: 256
-          minLength: 1
-          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
-          type: string
-        - description: Identifier format of any NGSI entity
-          format: uri
-          type: string
-      description: Reference to charging point currently being used
       x-ngsi:
         model: https://schema.org/URL
         type: Relationship

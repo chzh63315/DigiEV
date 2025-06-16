@@ -195,8 +195,8 @@ ChargingPoint:
       x-ngsi:
         model: https://schema.org/URL
         type: Relationship
-    
-    refVehicle:
+
+    refChargingPointStatus:
       anyOf:
         - description: Identifier format of any NGSI entity
           maxLength: 256
@@ -206,7 +206,7 @@ ChargingPoint:
         - description: Identifier format of any NGSI entity
           format: uri
           type: string
-      description: Reference to vehicle currently using this point
+      description: Reference to the PointStatus 
       x-ngsi:
         model: https://schema.org/URL
         type: Relationship
@@ -308,7 +308,8 @@ ChargingPoint:
   required:
     - id
     - type
-    - refChargingStation
+    - refChargingStatio
+    - refChargingPointStatus
     - chargingType
     - connectorTypes
     - maxPowerOutput

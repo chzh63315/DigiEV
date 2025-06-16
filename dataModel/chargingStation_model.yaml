@@ -339,7 +339,7 @@ ChargingStation:
         type: Property
     
     # Relationships to Other Entities
-    refchargingPoints:
+    refChargingPoints:
       type: array
       items:
         type: string
@@ -349,7 +349,7 @@ ChargingStation:
         type: Relationship
         model: http://schema.org/URL
     
-    stationStatus:
+    refStationStatus:
       type: string
       format: uri
       description: Reference to real-time station status information
