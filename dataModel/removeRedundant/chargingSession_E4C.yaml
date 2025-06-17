@@ -6,8 +6,8 @@
 
 ChargingSession:
   description: 'E4C charging session represents a complete charging event for an electric vehicle, including session details, energy consumption, duration, and billing information'
-  allOf:
-    - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+  # allOf:
+  #   - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
   type: object
   properties:
     # NGSI-LD Required Properties
@@ -335,10 +335,10 @@ ChargingSession:
     - sessionStartTime
     - lastUpdated
   
-  # Metadata
-  x-derived-from: "Smart Data Models - Transportation"
-  x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
-  x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
-  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingSession/schema.json"
-  x-model-tags: "NGSI-LD, EV, Electric Vehicle, Charging, Session, Transportation"
-  x-version: "1.0.0"
+  # # Metadata
+  # x-derived-from: "Smart Data Models - Transportation"
+  # x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
+  # x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
+  # x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingSession/schema.json"
+  # x-model-tags: "NGSI-LD, EV, Electric Vehicle, Charging, Session, Transportation"
+  # x-version: "1.0.0"

@@ -1,12 +1,13 @@
-# mainE4C_refMethod
 openapi: 3.0.0
 info:
-  title: EV Charging System Data Models
+  title: E4C Electric Vehicle Charging System Data Models
   version: 1.0.0
+  description: NGSI-LD data models for electric vehicle charging infrastructure
+
+paths: {}
 
 components:
   schemas:
-
     ChargingStation:
       $ref: "./removeRedundant/chargingStation_E4C.yaml#/ChargingStation"
     
@@ -14,7 +15,7 @@ components:
       $ref: "./removeRedundant/chargingStationStatus_E4C.yaml#/ChargingStationStatus"
     
     ChargingPoint:
-      $ref: "./removeRedundant/removeRedundant/chargingPoint_E4C.yaml#/ChargingPoint"
+      $ref: "./removeRedundant/chargingPoint_E4C.yaml#/ChargingPoint"
     
     ChargingPointStatus:
       $ref: "./removeRedundant/chargingPointStatus_E4C.yaml#/ChargingPointStatus"
@@ -24,6 +25,6 @@ components:
     
     E-VehicleStatus:
       $ref: "./removeRedundant/e-VehicleStatus_E4C.yaml#/E-VehicleStatus"
-    
+
     ChargingSession:
       $ref: "./removeRedundant/chargingSession_E4C.yaml#/ChargingSession"

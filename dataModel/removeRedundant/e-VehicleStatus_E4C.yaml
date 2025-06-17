@@ -6,8 +6,8 @@
 
 E-VehicleStatus:
   description: 'Real-time operational status and dynamic data for E4C electric vehicle, including battery status, location, charging state, and other frequently changing properties'
-  allOf:
-    - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+  # allOf:
+  #   - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
   type: object
   properties:
     # NGSI-LD Required Properties
@@ -289,10 +289,10 @@ E-VehicleStatus:
     - dateCreated
 
   
-  # Metadata
-  x-derived-from: "Smart Data Models - Transportation"
-  x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
-  x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
-  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/E-VehicleStatus/schema.json"
-  x-model-tags: "NGSI-LD, EV, Electric Vehicle, Transportation, Dynamic Data, Real-time"
-  x-version: "1.0.0"
+  # # Metadata
+  # x-derived-from: "Smart Data Models - Transportation"
+  # x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
+  # x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
+  # x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/E-VehicleStatus/schema.json"
+  # x-model-tags: "NGSI-LD, EV, Electric Vehicle, Transportation, Dynamic Data, Real-time"
+  # x-version: "1.0.0"

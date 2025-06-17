@@ -6,8 +6,8 @@
 
 ChargingStationStatus:
   description: Real-time operational status and dynamic data for E4C charging station
-  allOf:
-    - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+  # allOf:
+  #   - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
   type: object
   properties:
     # NGSI-LD Required Properties
@@ -252,10 +252,10 @@ ChargingStationStatus:
     - availablePoints
 
   
-  # Metadata
-  x-derived-from: "Smart Data Models - Transportation"
-  x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
-  x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
-  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingStationStatus/schema.json"
-  x-model-tags: "NGSI-LD, EV, Charging, Transportation, Status, Real-time"
-  x-version: "1.0.0"
+  # # Metadata
+  # x-derived-from: "Smart Data Models - Transportation"
+  # x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
+  # x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
+  # x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingStationStatus/schema.json"
+  # x-model-tags: "NGSI-LD, EV, Charging, Transportation, Status, Real-time"
+  # x-version: "1.0.0"
