@@ -122,8 +122,8 @@ components:
           items:
             type: string
             enum:
-              - Type1_J1772
-              - Type2_Mennekes
+              - Type1
+              - Type2
               - CHAdeMO
               - CCS_Combo1
               - CCS_Combo2
