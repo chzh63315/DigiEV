@@ -1,0 +1,138 @@
+
+# =====================================
+# ChargingPointStatus Data Model - NGSI-LD Standard
+# =====================================
+# Version: 1.0.0
+# Description: Real-time status and dynamic data for E4C charging point
+
+ChargingPointStatus:
+  description: 'Real-time operational status and dynamic data for E4C charging point, including current status, operating parameters, and monitoring information'
+  allOf:
+    - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+  type: object
+  properties:
+    # NGSI-LD Required Properties
+    id:
+      anyOf:
+        - description: Identifier format of any NGSI entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI entity
+          format: uri
+          type: string
+      description: Unique identifier of the charging point status entity
+      x-ngsi:
+        type: Property
+    
+    type:
+      description: NGSI Entity type. It has to be ChargingPointStatus
+      enum:
+        - ChargingPointStatus
+      type: string
+      x-ngsi:
+        type: Property
+    
+    # Standard Common Properties
+    dateCreated:
+      description: Entity creation timestamp. This will usually be allocated by the storage platform
+      format: date-time
+      type: string
+      x-ngsi:
+        type: Property
+    
+    # Reference to Static Point
+    refChargingPoint:
+      anyOf:
+        - description: Identifier format of any NGSI entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI entity
+          format: uri
+          type: string
+      description: Reference to the charging point this status belongs to
+      x-ngsi:
+        model: https://schema.org/URL
+        type: Relationship
+    
+    # Current Operational Status
+    unitStatus:
+      description: Current operational status of the charging point
+      enum:
+        - available
+        - occupied
+        - reserved
+        - charging
+        - finishing
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    
+    # Real-time Operating Data
+    operatingData:
+      description: Current operating parameters of the point
+      properties:
+        currentPowerOutput:
+          description: Current power output in kW
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: kW
+        currentVoltage:
+          description: Current output voltage in V
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: V
+        currentCurrent:
+          description: Current output current in A
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: A
+        powerFactor:
+          description: Current power factor
+          maximum: 1
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+        efficiency:
+          description: Current operating efficiency percentage
+          maximum: 100
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: percent
+      type: object
+      x-ngsi:
+        model: https://schema.org/Object
+        type: Property   
+ 
+  required:
+    - id
+    - type
+    - refChargingPoint
+    - unitStatus
+    - dateCreated
+  
+  # Metadata
+  x-derived-from: "Smart Data Models - Transportation"
+  x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
+  x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
+  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingPointStatus/schema.json"
+  x-model-tags: "NGSI-LD, EV, Electric Vehicle, Charging, Point, Status, Dynamic"
+  x-version: "1.0.0"

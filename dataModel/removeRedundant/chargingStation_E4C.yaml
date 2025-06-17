@@ -1,0 +1,168 @@
+# =====================================
+# ChargingStation Data Model - NGSI-LD Standard
+# =====================================
+# Version: 1.0.0
+# Description: E4C charging station with static configuration and basic information
+
+ChargingStation:
+  description: E4C charging station that contains multiple charging points for electric vehicles - static configuration data
+  allOf:
+    - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+    - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/Location-Commons"
+  type: object
+  properties:
+    # NGSI-LD Required Properties
+    id:
+      anyOf:
+        - description: Identifier format of any NGSI-LD entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI-LD entity as URI
+          format: uri
+          type: string
+      description: Unique identifier of the charging station entity
+      x-ngsi:
+        type: Property
+    
+    type:
+      type: string
+      enum:
+        - ChargingStation
+      description: NGSI-LD Entity type. It must be ChargingStation
+      x-ngsi:
+        type: Property
+
+    # Standard Common Properties   
+    dateCreated:
+      description: Entity creation timestamp. This will usually be allocated by the storage platform
+      format: date-time
+      type: string
+      x-ngsi:
+        type: Property
+       
+    # Timestamps
+    lastUpdated:
+      description: Timestamp when data was last updated
+      format: date-time
+      type: string
+      x-ngsi:
+        model: https://schema.org/DateTime
+        type: Property
+    
+    # Basic Station Information
+    stationName:
+      type: string
+      description: Name of the charging station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    stationId:
+      type: string
+      description: External identifier or code for the station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Capacity Configuration
+    totalChargingPoints:
+      type: integer
+      minimum: 1
+      description: Total number of charging points installed in this station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+    
+    # Technical Specifications
+    maxPowerCapacity:
+      type: number
+      minimum: 0
+      description: Maximum total power capacity of the station in kW
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+        units: kW
+    
+    ratedVoltage:
+      type: number
+      minimum: 0
+      description: The rated voltage offered by the charging station in Volts
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+        units: V
+    
+    gridConnection:
+      type: string
+      enum:
+        - lowVoltage
+        - mediumVoltage
+        - highVoltage
+        - directCurrent
+      description: Type of electrical grid connection
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Socket Types Available
+    socketType:
+      type: array
+      items:
+        type: string
+        enum:
+          - Type1_J1772
+          - Type2_Mennekes
+          - CHAdeMO
+          - CCS_Combo1
+          - CCS_Combo2
+          - Tesla_Supercharger
+          - Tesla_Destination
+          - GB_T_AC
+          - GB_T_DC
+          - Schuko
+          - CEE
+          - Caravan_Mains_Socket
+          - Wall_Euro
+          - Other
+      minItems: 1
+      uniqueItems: true
+      description: Types of charging sockets/connectors available at this station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Relationships to Other Entities
+    refChargingPoints:
+      type: array
+      items:
+        type: string
+        format: uri
+      description: References to charging points in this station
+      x-ngsi:
+        type: Relationship
+        model: http://schema.org/URL
+    
+    refStationStatus:
+      type: string
+      format: uri
+      description: Reference to real-time station status information
+      x-ngsi:
+        type: Relationship
+        model: http://schema.org/URL
+  
+  required:
+    - id
+    - type
+    - stationName
+    - totalChargingPoints
+    - socketType
+  
+  # Metadata
+  x-derived-from: "Smart Data Models - Transportation"
+  x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
+  x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
+  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingStation/schema.json"
+  x-model-tags: "NGSI-LD, EV, Charging, Transportation, Static"
+  x-version: "1.0.0"

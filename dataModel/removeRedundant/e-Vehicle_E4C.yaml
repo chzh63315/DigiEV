@@ -2,10 +2,10 @@
 # E-Vehicle Data Model - Static Information
 # =====================================
 # Version: 1.0.0
-# Description: Static information and specifications for an electric vehicle
+# Description: Static information and specifications for a E4C electric vehicle
 
 E-Vehicle:
-  description: 'Static information and specifications for an electric vehicle, including all properties which are common to the vehicle model and do not change frequently'
+  description: 'Static information and specifications for a E4C electric vehicle, including all properties which are common to the vehicle model and do not change frequently'
   allOf:
     - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
   type: object
@@ -40,34 +40,17 @@ E-Vehicle:
       type: string
       x-ngsi:
         type: Property
-    
-    dateModified:
-      description: Timestamp of the last modification of the entity. This will usually be allocated by the storage platform
+
+    # Timestamps
+    lastUpdated:
+      description: Timestamp when data was last updated
       format: date-time
       type: string
       x-ngsi:
+        model: https://schema.org/DateTime
         type: Property
     
-    description:
-      description: A description of this item
-      type: string
-      x-ngsi:
-        type: Property
-    
-    name:
-      description: The name of this item
-      type: string
-      x-ngsi:
-        type: Property
-    
-    # Vehicle Basic Information
-    vehicleIdentificationNumber:
-      description: The Vehicle Identification Number (VIN) is a unique serial number used by the automotive industry to identify individual motor vehicles
-      type: string
-      x-ngsi:
-        model: https://schema.org/vehicleIdentificationNumber
-        type: Property
-    
+    # Vehicle Basic Information   
     vehiclePlateIdentifier:
       description: 'An identifier or code displayed on a vehicle registration plate attached to the vehicle used for official identification purposes'
       type: string
@@ -81,14 +64,7 @@ E-Vehicle:
       x-ngsi:
         model: https://schema.org/brand
         type: Property
-    
-    model:
-      description: Vehicle model name
-      type: string
-      x-ngsi:
-        model: https://schema.org/model
-        type: Property
-    
+       
     color:
       description: The color of the vehicle
       type: string
@@ -176,33 +152,11 @@ E-Vehicle:
               - AC-Level1
               - AC-Level2
               - DC-FastCharging
-              - wireless
-              - batterySwap
               - bidirectional
             type: string
           type: array
           x-ngsi:
             model: https://schema.org/Text
-            type: Property
-        onboardChargerCapacity:
-          description: Onboard charger capacity in kW
-          minimum: 0
-          type: number
-          x-ngsi:
-            model: https://schema.org/Number
-            type: Property
-            units: kW
-        supportsVehicleToGrid:
-          description: Whether the vehicle supports Vehicle-to-Grid (V2G) functionality
-          type: boolean
-          x-ngsi:
-            model: https://schema.org/Boolean
-            type: Property
-        supportsSmartCharging:
-          description: Whether the vehicle supports smart charging features
-          type: boolean
-          x-ngsi:
-            model: https://schema.org/Boolean
             type: Property
       type: object
       x-ngsi:
@@ -224,42 +178,13 @@ E-Vehicle:
       x-ngsi:
         model: https://schema.org/URL
         type: Relationship
-        
-    # Additional Information
-    category:
-      description: 'Vehicle category(ies) from an external point of view'
-      items:
-        enum:
-          - electric
-          - hybrid
-          - pluginHybrid
-          - municipalServices
-          - private
-          - public
-          - commercial
-          - fleet
-          - rideshare
-          - delivery
-        type: string
-      type: array
-      x-ngsi:
-        model: https://schema.org/Text
-        type: Property
     
     vehicleType:
       description: 'Type of vehicle from the point of view of its structural characteristics'
       enum:
         - car
-        - suv
-        - truck
         - van
-        - bus
         - motorcycle
-        - scooter
-        - bicycle
-        - boat
-        - aircraft
-        - other
       type: string
       x-ngsi:
         model: https://schema.org/Text
@@ -268,9 +193,8 @@ E-Vehicle:
   required:
     - id
     - type
-    - vehicleIdentificationNumber
     - brand
-    - model
+    - vehiclePlateIdentifier
     - batterySpecifications
     - chargingCapabilities
     - refVehicleStatus

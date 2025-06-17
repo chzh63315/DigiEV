@@ -1,0 +1,298 @@
+# =====================================
+# E-VehicleStatus Data Model - Dynamic Information
+# =====================================
+# Version: 1.0.0
+# Description: Real-time status and dynamic data for E4C electric vehicle
+
+E-VehicleStatus:
+  description: 'Real-time operational status and dynamic data for E4C electric vehicle, including battery status, location, charging state, and other frequently changing properties'
+  allOf:
+    - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+  type: object
+  properties:
+    # NGSI-LD Required Properties
+    id:
+      anyOf:
+        - description: Identifier format of any NGSI entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI entity
+          format: uri
+          type: string
+      description: Unique identifier of the electric vehicle status entity
+      x-ngsi:
+        type: Property
+    
+    type:
+      description: NGSI Entity type. It has to be E-VehicleStatus
+      enum:
+        - E-VehicleStatus
+      type: string
+      x-ngsi:
+        type: Property
+    
+    # Standard Common Properties  
+    dateCreated:
+      description: Entity creation timestamp. This will usually be allocated by the storage platform
+      format: date-time
+      type: string
+      x-ngsi:
+        type: Property
+
+    # Reference to Parent Vehicle
+    refVehicle:
+      anyOf:
+        - description: Identifier format of any NGSI entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI entity
+          format: uri
+          type: string
+      description: Reference to the E-Vehicle this status belongs to
+      x-ngsi:
+        model: https://schema.org/URL
+        type: Relationship
+       
+    # Battery Status
+    batteryStatus:
+      description: Current battery status and health information
+      properties:
+        stateOfCharge:
+          description: Current battery state of charge as percentage (0-100)
+          maximum: 100
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: percent
+        batteryVoltage:
+          description: Current battery pack voltage in Volts
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: V
+        batteryCurrent:
+          description: Current battery pack current in Amperes (positive for discharge, negative for charge)
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: A
+        batteryPower:
+          description: Current battery power in kW (positive for discharge, negative for charge)
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: kW
+        stateOfHealth:
+          description: Battery state of health as percentage (0-100)
+          maximum: 100
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: percent
+        cycleCount:
+          description: Number of charge/discharge cycles completed
+          minimum: 0
+          type: integer
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+        timeToEmpty:
+          description: Estimated time until battery is empty in minutes
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: minutes
+        timeToFull:
+          description: Estimated time until battery is fully charged in minutes (only when charging)
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: minutes
+      type: object
+      x-ngsi:
+        model: https://schema.org/Object
+        type: Property
+    
+ # Range Information
+    batteryRangeStatus:
+      description: Real-time status about driving range, focused on charging/discharging scenarios
+      properties:
+        currentRange:
+          description: Current estimated driving range with present battery level in kilometers
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: km
+        rangeAtFullCharge:
+          description: Maximum driving range when battery reaches 100% SoC in kilometers
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: km
+        energyConsumptionRate:
+          description: Real-time energy consumption rate in kWh per 100km
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: kWh/100km
+
+    # Charging Status
+    chargingStatus:
+      description: Current charging status and information
+      properties:
+        isCharging:
+          description: Whether the vehicle is currently charging
+          type: boolean
+          x-ngsi:
+            model: https://schema.org/Boolean
+            type: Property
+        chargingState:
+          description: Current charging state
+          enum:
+          - initiated
+          - authorized
+          - started
+          - charging
+          - suspended
+          - ended
+          - completed
+          - failed
+          - cancelled
+          type: string
+          x-ngsi:
+            model: https://schema.org/Text
+            type: Property
+        chargingMode:
+          description: Current charging mode
+          enum:
+            - AC-Level1
+            - AC-Level2
+            - DC-FastCharging
+            - bidirectional
+          type: string
+          x-ngsi:
+            model: https://schema.org/Text
+            type: Property
+        chargingPower:
+          description: Current charging power in kW
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: kW
+        chargingVoltage:
+          description: Current charging voltage in Volts
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: V
+        chargingCurrent:
+          description: Current charging current in Amperes
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: A
+        chargingEfficiency:
+          description: Current charging efficiency as percentage
+          maximum: 100
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: percent
+        energyConsumed:
+          description: Total energy consumed during current charging session in kWh
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: kWh
+        chargingStartTime:
+          description: Timestamp when current charging session started
+          format: date-time
+          type: string
+          x-ngsi:
+            model: https://schema.org/DateTime
+            type: Property
+        estimatedChargingTime:
+          description: Estimated remaining charging time in minutes
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: minutes
+        targetStateOfCharge:
+          description: Target state of charge for current charging session
+          maximum: 100
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: percent
+      type: object
+      x-ngsi:
+        model: https://schema.org/Object
+        type: Property
+    
+    # Relationships to Charging Infrastructure
+    refChargingSession:
+      anyOf:
+        - description: Identifier format of any NGSI entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI entity
+          format: uri
+          type: string
+      description: Reference to current charging session if vehicle is currently charging
+      x-ngsi:
+        model: https://schema.org/URL
+        type: Relationship
+       
+  required:
+    - id
+    - type
+    - refVehicle
+    - batteryStatus
+    - dateCreated
+
+  
+  # Metadata
+  x-derived-from: "Smart Data Models - Transportation"
+  x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
+  x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
+  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/E-VehicleStatus/schema.json"
+  x-model-tags: "NGSI-LD, EV, Electric Vehicle, Transportation, Dynamic Data, Real-time"
+  x-version: "1.0.0"

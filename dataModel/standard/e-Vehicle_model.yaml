@@ -1,0 +1,287 @@
+# =====================================
+# E-Vehicle Data Model - Static Information
+# =====================================
+# Version: 1.0.0
+# Description: Static information and specifications for an electric vehicle
+
+E-Vehicle:
+  description: 'Static information and specifications for an electric vehicle, including all properties which are common to the vehicle model and do not change frequently'
+  allOf:
+    - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+  type: object
+  properties:
+    # NGSI-LD Required Properties
+    id:
+      anyOf:
+        - description: Identifier format of any NGSI entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI entity
+          format: uri
+          type: string
+      description: Unique identifier of the electric vehicle entity
+      x-ngsi:
+        type: Property
+    
+    type:
+      description: NGSI Entity type. It has to be E-Vehicle
+      enum:
+        - E-Vehicle
+      type: string
+      x-ngsi:
+        type: Property
+    
+    # Standard Common Properties   
+    dateCreated:
+      description: Entity creation timestamp. This will usually be allocated by the storage platform
+      format: date-time
+      type: string
+      x-ngsi:
+        type: Property
+        
+    description:
+      description: A description of this item
+      type: string
+      x-ngsi:
+        type: Property
+    
+    name:
+      description: The name of this item
+      type: string
+      x-ngsi:
+        type: Property
+        
+    # Timestamps
+    lastUpdated:
+      description: Timestamp when data was last updated
+      format: date-time
+      type: string
+      x-ngsi:
+        model: https://schema.org/DateTime
+        type: Property
+
+    # Vehicle Basic Information
+    vehicleIdentificationNumber:
+      description: The Vehicle Identification Number (VIN) is a unique serial number used by the automotive industry to identify individual motor vehicles
+      type: string
+      x-ngsi:
+        model: https://schema.org/vehicleIdentificationNumber
+        type: Property
+    
+    vehiclePlateIdentifier:
+      description: 'An identifier or code displayed on a vehicle registration plate attached to the vehicle used for official identification purposes'
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    
+    brand:
+      description: Vehicle brand or manufacturer
+      type: string
+      x-ngsi:
+        model: https://schema.org/brand
+        type: Property
+    
+    model:
+      description: Vehicle model name
+      type: string
+      x-ngsi:
+        model: https://schema.org/model
+        type: Property
+    
+    color:
+      description: The color of the vehicle
+      type: string
+      x-ngsi:
+        model: https://schema.org/color
+        type: Property
+    
+    # Electric Vehicle Specifications
+    batterySpecifications:
+      description: Battery system specifications
+      properties:
+        totalCapacity:
+          description: Total battery capacity in kWh
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: kWh
+        batteryType:
+          description: Type of battery technology
+          enum:
+            - lithium-ion
+            - lithium-polymer
+            - nickel-metal-hydride
+            - solid-state
+            - other
+          type: string
+          x-ngsi:
+            model: https://schema.org/Text
+            type: Property
+        nominalVoltage:
+          description: Nominal battery voltage in Volts
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: V
+      type: object
+      x-ngsi:
+        model: https://schema.org/Object
+        type: Property
+
+    chargingCapabilities:
+      description: Charging system capabilities and specifications
+      properties:
+        maxChargingPowerAC:
+          description: Maximum AC charging power supported by the vehicle in kW
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: kW
+        maxChargingPowerDC:
+          description: Maximum DC charging power supported by the vehicle in kW
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: kW
+        chargingPortTypes:
+          description: Types of charging ports available on the vehicle
+          items:
+            enum:
+              - CCS1
+              - CCS2
+              - CHAdeMO
+              - Type1
+              - Type2
+              - Tesla
+              - GBT
+              - NACS
+            type: string
+          type: array
+          x-ngsi:
+            model: https://schema.org/Text
+            type: Property
+        chargingStandards:
+          description: Charging standards supported by the vehicle
+          items:
+            enum:
+              - AC-Level1
+              - AC-Level2
+              - DC-FastCharging
+              - wireless
+              - batterySwap
+              - bidirectional
+            type: string
+          type: array
+          x-ngsi:
+            model: https://schema.org/Text
+            type: Property
+        onboardChargerCapacity:
+          description: Onboard charger capacity in kW
+          minimum: 0
+          type: number
+          x-ngsi:
+            model: https://schema.org/Number
+            type: Property
+            units: kW
+        supportsVehicleToGrid:
+          description: Whether the vehicle supports Vehicle-to-Grid (V2G) functionality
+          type: boolean
+          x-ngsi:
+            model: https://schema.org/Boolean
+            type: Property
+        supportsSmartCharging:
+          description: Whether the vehicle supports smart charging features
+          type: boolean
+          x-ngsi:
+            model: https://schema.org/Boolean
+            type: Property
+      type: object
+      x-ngsi:
+        model: https://schema.org/Object
+        type: Property
+       
+    # Relationships to e-VehicleStatus
+    refVehicleStatus:
+      anyOf:
+        - description: Identifier format of any NGSI entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI entity
+          format: uri
+          type: string
+      description: Reference to current VehicleS tatus
+      x-ngsi:
+        model: https://schema.org/URL
+        type: Relationship
+        
+    # Additional Information
+    category:
+      description: 'Vehicle category(ies) from an external point of view'
+      items:
+        enum:
+          - electric
+          - hybrid
+          - pluginHybrid
+          - municipalServices
+          - private
+          - public
+          - commercial
+          - fleet
+          - rideshare
+          - delivery
+        type: string
+      type: array
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+    
+    vehicleType:
+      description: 'Type of vehicle from the point of view of its structural characteristics'
+      enum:
+        - car
+        - suv
+        - truck
+        - van
+        - bus
+        - motorcycle
+        - scooter
+        - bicycle
+        - boat
+        - aircraft
+        - other
+      type: string
+      x-ngsi:
+        model: https://schema.org/Text
+        type: Property
+  
+  required:
+    - id
+    - type
+    - vehicleIdentificationNumber
+    - brand
+    - model
+    - batterySpecifications
+    - chargingCapabilities
+    - refVehicleStatus
+    - vehicleType
+  
+  # Metadata
+  x-derived-from: "Smart Data Models - Transportation"
+  x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
+  x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
+  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/E-Vehicle/schema.json"
+  x-model-tags: "NGSI-LD, EV, Electric Vehicle, Transportation, Static Data"
+  x-version: "1.0.0"

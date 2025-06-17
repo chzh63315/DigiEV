@@ -150,7 +150,7 @@ ChargingSession:
         model: https://schema.org/DateTime
         type: Property
     
-    totalDuration:
+    sessionDuration:
       description: Total session duration in minutes (from initiation to completion)
       minimum: 0
       type: number

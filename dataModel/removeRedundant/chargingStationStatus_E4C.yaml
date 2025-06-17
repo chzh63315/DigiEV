@@ -1,0 +1,261 @@
+# =====================================
+# ChargingStationStatus Model - NGSI-LD Standard
+# =====================================
+# Version: 1.0.0
+# Description: Real-time status information for E4C chE4Crging station
+
+ChargingStationStatus:
+  description: Real-time operational status and dynamic data for E4C charging station
+  allOf:
+    - $ref: "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+  type: object
+  properties:
+    # NGSI-LD Required Properties
+    id:
+      anyOf:
+        - description: Identifier format of any NGSI-LD entity
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\w\-\.\{\}\$\+\*\[\]`|~^@!,:\\]+$
+          type: string
+        - description: Identifier format of any NGSI-LD entity as URI
+          format: uri
+          type: string
+      description: Unique identifier of the charging station status entity
+      x-ngsi:
+        type: Property
+    
+    type:
+      type: string
+      enum:
+        - ChargingStationStatus
+      description: NGSI-LD Entity type. It must be ChargingStationStatus
+      x-ngsi:
+        type: Property
+    
+    # Reference to Parent Station
+    refChargingStation:
+      type: string
+      format: uri
+      description: Reference to the charging station this status belongs to
+      x-ngsi:
+        type: Relationship
+        model: http://schema.org/URL
+
+    # Standard Common Properties   
+    dateCreated:
+      description: Entity creation timestamp. This will usually be allocated by the storage platform
+      format: date-time
+      type: string
+      x-ngsi:
+        type: Property
+
+    # Operational Status
+    operationalStatus:
+      type: string
+      enum:
+        - operational
+        - outOfService
+        - maintenance
+      description: Overall operational status of the charging station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Point Availability Information
+    totalPoints:
+      type: integer
+      minimum: 0
+      description: Total number of charging points in the station
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+    
+    availablePoints:
+      type: integer
+      minimum: 0
+      description: Number of currently available charging points
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+    
+    occupiedPoints:
+      type: integer
+      minimum: 0
+      description: Number of occupied charging points
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+    
+    faultedPoints:
+      type: integer
+      minimum: 0
+      description: Number of faulted charging points
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+    
+    maintenancePoints:
+      type: integer
+      minimum: 0
+      description: Number of points under maintenance
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+    
+    reservedPoints:
+      type: integer
+      minimum: 0
+      description: Number of reserved charging points
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+    
+    # Power and Energy Information (Enhanced with Grid/Renewable Separation)
+    currentPowerConsumption:
+      type: number
+      minimum: 0
+      description: Current total power consumption of all active units in kW
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+        units: kW
+    
+    currentGridPowerConsumption:
+      type: number
+      minimum: 0
+      description: Current power consumption from electrical grid in kW
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+        units: kW
+    
+    currentRenewablePowerConsumption:
+      type: number
+      minimum: 0
+      description: Current power consumption from renewable energy sources in kW
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+        units: kW
+    
+    # Session Statistics
+    activeSessionsCount:
+      type: integer
+      minimum: 0
+      description: Number of currently active charging sessions
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+    
+    # Queue and Wait Time Information
+    queueLength:
+      type: integer
+      minimum: 0
+      description: Number of vehicles waiting in queue
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+    
+    estimatedWaitTime:
+      type: integer
+      minimum: 0
+      description: Estimated wait time for next available unit in minutes
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+        units: minutes
+    
+    # Environmental Conditions
+    ambientTemperature:
+      type: number
+      description: Current ambient temperature in Celsius
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+        units: Celsius
+    
+    humidity:
+      type: number
+      minimum: 0
+      maximum: 100
+      description: Current relative humidity in percentage
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+        units: percent
+    
+    weatherConditions:
+      type: string
+      enum:
+        - clear
+        - cloudy
+        - rainy
+        - snowy
+        - stormy
+        - windy
+        - foggy
+      description: Current weather conditions
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Text
+    
+    # Grid and Power Quality
+    gridVoltage:
+      type: number
+      minimum: 0
+      description: Current grid voltage in Volts
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+        units: V
+    
+    gridFrequency:
+      type: number
+      minimum: 0
+      description: Current grid frequency in Hz
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+        units: Hz
+    
+    powerFactor:
+      type: number
+      minimum: 0
+      maximum: 1
+      description: Current power factor
+      x-ngsi:
+        type: Property
+        model: http://schema.org/Number
+     
+    # Maintenance Information
+    lastMaintenanceDate:
+      type: string
+      format: date-time
+      description: Timestamp of last maintenance performed
+      x-ngsi:
+        type: Property
+    
+    nextScheduledMaintenance:
+      type: string
+      format: date-time
+      description: Next scheduled maintenance timestamp
+      x-ngsi:
+        type: Property
+  
+  required:
+    - id
+    - type
+    - refChargingStation
+    - dateCreated    
+    - totalPoints
+    - availablePoints
+
+  
+  # Metadata
+  x-derived-from: "Smart Data Models - Transportation"
+  x-disclaimer: "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the license conditions are met. Copyleft (c) 2024 Contributors to Smart Data Models Program"
+  x-license-url: "https://github.com/smart-data-models/dataModel.Transportation/blob/master/LICENSE.md"
+  x-model-schema: "https://smart-data-models.github.io/dataModel.Transportation/ChargingStationStatus/schema.json"
+  x-model-tags: "NGSI-LD, EV, Charging, Transportation, Status, Real-time"
+  x-version: "1.0.0"
