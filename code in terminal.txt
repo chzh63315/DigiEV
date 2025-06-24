@@ -1,7 +1,5 @@
 # 启动docker-compose服务
-#docker V1
 docker-compose up -d
-#docker V2
 docker compose up -d    
 
 # 查看运行中的容器
@@ -9,6 +7,13 @@ docker ps
 
 # 进入指定容器
 docker exec -it <container_id> bash  # Replace with the actual ID
+
+# Use Timescale
+psql -U orion -d orion    #username&password is orion
+#check all tables
+\dt
+#check all tables
+
 
 # Use the MongoDB Shell
 Mongo
@@ -37,3 +42,5 @@ docker stop <container_name_or_id>
 # 停止docker-compose所有服务
 docker-compose down
 docker compose down
+
+
