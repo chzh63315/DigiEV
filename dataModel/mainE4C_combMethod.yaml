@@ -75,6 +75,32 @@ components:
           x-ngsi:
             type: Property
             model: http://schema.org/Text
+
+        # Geojson
+        location:
+          description: 'Geojson reference to the item. Point location only'
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                type: number
+              minItems: 2
+              type: array
+            type:
+              enum:
+                - Point
+              type: string
+          required:
+            - type
+            - coordinates
+          title: GeoJSON Point
+          type: object
+          x-ngsi:
+            type: GeoProperty
         
         # Capacity Configuration
         totalChargingPoints:
@@ -1095,7 +1121,6 @@ components:
       required:
         - id
         - type
-        - refVehicleStatus
         - refChargingPoint
         - sessionStatus
         - sessionStartTime

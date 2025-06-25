@@ -407,7 +407,6 @@ ChargingSession:
   required:
     - id
     - type
-    - refVehicleStatus
     - refChargingPoint
     - sessionStatus
     - sessionStartTime

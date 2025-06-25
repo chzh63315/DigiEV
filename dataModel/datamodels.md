@@ -19,6 +19,9 @@ E4C charging station that contains multiple charging points for electric vehicle
 -  `stationId`: External identifier or code for the station
    -  Attribute type: **Property**. [Text](http://schema.org/Text)
    -  Optional
+-  `location`: Geojson reference to the item. Point location only
+   -  Attribute type: **GeoProperty**. 
+   -  Optional
 -  `totalChargingPoints`: Total number of charging points installed in this station
    -  Attribute type: **Property**. [Number](http://schema.org/Number)
    -  Required
@@ -193,75 +196,6 @@ Real-time operational status and dynamic data for E4C charging point, including 
 
 
 
-# E-Vehicle
-
-Static information and specifications for a E4C electric vehicle, including all properties which are common to the vehicle model and do not change frequently
--  `id`: Unique identifier of the electric vehicle entity
-   -  Attribute type: **Property**. 
-   -  Required
--  `type`: NGSI Entity type. It has to be E-Vehicle. One of : `E-Vehicle`.
-   -  Attribute type: **Property**. 
-   -  Required
--  `dateCreated`: Entity creation timestamp. This will usually be allocated by the storage platform
-   -  Attribute type: **Property**. 
-   -  Optional
--  `lastUpdated`: Timestamp when data was last updated
-   -  Attribute type: **Property**. [DateTime](https://schema.org/DateTime)
-   -  Optional
--  `vehiclePlateIdentifier`: An identifier or code displayed on a vehicle registration plate attached to the vehicle used for official identification purposes
-   -  Attribute type: **Property**. [Text](https://schema.org/Text)
-   -  Required
--  `brand`: Vehicle brand or manufacturer
-   -  Attribute type: **Property**. [brand](https://schema.org/brand)
-   -  Required
--  `color`: The color of the vehicle
-   -  Attribute type: **Property**. [color](https://schema.org/color)
-   -  Optional
--  `batterySpecifications`: Battery system specifications
-   -  Attribute type: **Property**. [Object](https://schema.org/Object)
-   -  Required
--  `chargingCapabilities`: Charging system capabilities and specifications
-   -  Attribute type: **Property**. [Object](https://schema.org/Object)
-   -  Required
--  `refVehicleStatus`: Reference to current VehicleS tatus
-   -  Attribute type: **Relationship**. [URL](https://schema.org/URL)
-   -  Required
--  `vehicleType`: Type of vehicle from the point of view of its structural characteristics. One of : `car`, `van`, `motorcycle`.
-   -  Attribute type: **Property**. [Text](https://schema.org/Text)
-   -  Required
-
-
-
-# E-VehicleStatus
-
-Real-time operational status and dynamic data for E4C electric vehicle, including battery status, location, charging state, and other frequently changing properties
--  `id`: Unique identifier of the electric vehicle status entity
-   -  Attribute type: **Property**. 
-   -  Required
--  `type`: NGSI Entity type. It has to be E-VehicleStatus. One of : `E-VehicleStatus`.
-   -  Attribute type: **Property**. 
-   -  Required
--  `dateCreated`: Entity creation timestamp. This will usually be allocated by the storage platform
-   -  Attribute type: **Property**. 
-   -  Required
--  `refVehicle`: Reference to the E-Vehicle this status belongs to
-   -  Attribute type: **Relationship**. [URL](https://schema.org/URL)
-   -  Required
--  `batteryStatus`: Current battery status and health information
-   -  Attribute type: **Property**. [Object](https://schema.org/Object)
-   -  Required
--  `batteryRangeStatus`: Real-time status about driving range, focused on charging/discharging scenarios
-   -  Attribute type: **Property**. 
-   -  Optional
--  `chargingStatus`: Current charging status and information
-   -  Attribute type: **Property**. [Object](https://schema.org/Object)
-   -  Optional
--  `refChargingSession`: Reference to current charging session if vehicle is currently charging
-   -  Attribute type: **Relationship**. [URL](https://schema.org/URL)
-   -  Optional
-
-
-
 # ChargingSession
 
 E4C charging session represents a complete charging event for an electric vehicle, including session details, energy consumption, duration, and billing information
@@ -276,7 +210,7 @@ E4C charging session represents a complete charging event for an electric vehicl
    -  Optional
 -  `refVehicleStatus`: Reference to the E-Vehicle Status that is being charged
    -  Attribute type: **Relationship**. [URL](https://schema.org/URL)
-   -  Required
+   -  Optional
 -  `refChargingPoint`: Reference to the charging point being used for this session
    -  Attribute type: **Relationship**. [URL](https://schema.org/URL)
    -  Required
@@ -349,6 +283,75 @@ E4C charging session represents a complete charging event for an electric vehicl
 -  `lastUpdated`: Timestamp when data was last updated
    -  Attribute type: **Property**. [DateTime](https://schema.org/DateTime)
    -  Required
+
+
+
+# E-Vehicle
+
+Static information and specifications for a E4C electric vehicle, including all properties which are common to the vehicle model and do not change frequently
+-  `id`: Unique identifier of the electric vehicle entity
+   -  Attribute type: **Property**. 
+   -  Required
+-  `type`: NGSI Entity type. It has to be E-Vehicle. One of : `E-Vehicle`.
+   -  Attribute type: **Property**. 
+   -  Required
+-  `dateCreated`: Entity creation timestamp. This will usually be allocated by the storage platform
+   -  Attribute type: **Property**. 
+   -  Optional
+-  `lastUpdated`: Timestamp when data was last updated
+   -  Attribute type: **Property**. [DateTime](https://schema.org/DateTime)
+   -  Optional
+-  `vehiclePlateIdentifier`: An identifier or code displayed on a vehicle registration plate attached to the vehicle used for official identification purposes
+   -  Attribute type: **Property**. [Text](https://schema.org/Text)
+   -  Required
+-  `brand`: Vehicle brand or manufacturer
+   -  Attribute type: **Property**. [brand](https://schema.org/brand)
+   -  Required
+-  `color`: The color of the vehicle
+   -  Attribute type: **Property**. [color](https://schema.org/color)
+   -  Optional
+-  `batterySpecifications`: Battery system specifications
+   -  Attribute type: **Property**. [Object](https://schema.org/Object)
+   -  Required
+-  `chargingCapabilities`: Charging system capabilities and specifications
+   -  Attribute type: **Property**. [Object](https://schema.org/Object)
+   -  Required
+-  `refVehicleStatus`: Reference to current VehicleS tatus
+   -  Attribute type: **Relationship**. [URL](https://schema.org/URL)
+   -  Required
+-  `vehicleType`: Type of vehicle from the point of view of its structural characteristics. One of : `car`, `van`, `motorcycle`.
+   -  Attribute type: **Property**. [Text](https://schema.org/Text)
+   -  Required
+
+
+
+# E-VehicleStatus
+
+Real-time operational status and dynamic data for E4C electric vehicle, including battery status, location, charging state, and other frequently changing properties
+-  `id`: Unique identifier of the electric vehicle status entity
+   -  Attribute type: **Property**. 
+   -  Required
+-  `type`: NGSI Entity type. It has to be E-VehicleStatus. One of : `E-VehicleStatus`.
+   -  Attribute type: **Property**. 
+   -  Required
+-  `dateCreated`: Entity creation timestamp. This will usually be allocated by the storage platform
+   -  Attribute type: **Property**. 
+   -  Required
+-  `refVehicle`: Reference to the E-Vehicle this status belongs to
+   -  Attribute type: **Relationship**. [URL](https://schema.org/URL)
+   -  Required
+-  `batteryStatus`: Current battery status and health information
+   -  Attribute type: **Property**. [Object](https://schema.org/Object)
+   -  Required
+-  `batteryRangeStatus`: Real-time status about driving range, focused on charging/discharging scenarios
+   -  Attribute type: **Property**. 
+   -  Optional
+-  `chargingStatus`: Current charging status and information
+   -  Attribute type: **Property**. [Object](https://schema.org/Object)
+   -  Optional
+-  `refChargingSession`: Reference to current charging session if vehicle is currently charging
+   -  Attribute type: **Relationship**. [URL](https://schema.org/URL)
+   -  Optional
 
 
 
