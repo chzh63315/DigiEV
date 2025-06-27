@@ -65,7 +65,7 @@ ChargingPointStatus:
         type: Relationship
     
     # Current Operational Status
-    unitStatus:
+    pointStatus:
       description: Current operational status of the charging point
       enum:
         - available

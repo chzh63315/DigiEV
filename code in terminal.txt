@@ -1,3 +1,5 @@
+sudo systemctl stop postgresql
+
 # 启动docker-compose服务
 docker-compose up -d
 docker compose up -d    
