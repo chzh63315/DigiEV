@@ -785,7 +785,7 @@ components:
         - id
         - type
         - refChargingPoint
-        - unitStatus
+        - pointStatus
         - dateCreated
       
       # # Metadata

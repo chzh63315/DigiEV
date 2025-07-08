@@ -239,7 +239,7 @@ ChargingPointStatus:
     - id
     - type
     - refChargingPoint
-    - unitStatus
+    - pointStatus
     - dateCreated
   
   # Metadata

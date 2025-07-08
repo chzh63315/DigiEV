@@ -123,7 +123,7 @@
         "totalCapacity": "fiware:totalCapacity",
         "totalChargingPoints": "fiware:totalChargingPoints",
         "totalPoints": "fiware:totalPoints",
-        "unitStatus": "fiware:unitStatus",
+        "pointStatus": "fiware:pointStatus",
         "userId": "fiware:userId",
         "vehiclePlateIdentifier": "fiware:vehiclePlateIdentifier",
         "vehicleType": "fiware:vehicleType",
