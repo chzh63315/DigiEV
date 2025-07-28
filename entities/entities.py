@@ -290,6 +290,16 @@ CS_001_S = {
         "type": "Property",
         "value": 1
     },
+
+    "occupiedPoints": {
+        "type": "Property",
+        "value": 0
+    },
+    "currentPowerConsumption": {
+        "type": "Property",
+        "value": 0,
+        "units": "kW",
+    }
 }
 
 CS_002_S = {
@@ -319,6 +329,16 @@ CS_002_S = {
         "type": "Property",
         "value": 10
     },
+
+    "occupiedPoints": {
+        "type": "Property",
+        "value": 0
+    },
+    "currentPowerConsumption": {
+        "type": "Property",
+        "value": 0,
+        "units": "kW",
+    }
 }
 
 #charging poiont status
@@ -339,7 +359,12 @@ CP_001_S = {
     "pointStatus": {
         "type": "Property",
         "value": "available"
-    }
+    },
+    "currentPowerOutput": {
+        "type": "Property",
+        "value": 0,
+        "units": "kW",
+    }    
 }
 
 def B103_charging_point_status(point_number):
@@ -348,23 +373,25 @@ def B103_charging_point_status(point_number):
     charging_point_status = {
         "id": f"urn:ngsi-ld:ChargingPointStatus:Building103-P-{formatted_number}-S",
         "type": "ChargingPointStatus",
-        
-        "refChargingPoint": {
-            "type": "Relationship",
-            "object": f"urn:ngsi-ld:ChargingPointStatus:Building103-P-{formatted_number}"
-        },
-    
-        "pointStatus": {
-        "type": "Property",
-        "value": "available"
-        },  
-        
         "dateCreated": {
             "type": "Property",
             "value": {
                 "@type": "DateTime",
                 "@value": datetime.now().isoformat() + "Z"
             }
+        },
+        "refChargingPoint": {
+            "type": "Relationship",
+            "object": f"urn:ngsi-ld:ChargingPointStatus:Building103-P-{formatted_number}"
+        },
+        "pointStatus": {
+        "type": "Property",
+        "value": "available"
+        },  
+        "currentPowerOutput": {
+            "type": "Property",
+            "value": 0,
+            "units": "kW",
         }
     }
     

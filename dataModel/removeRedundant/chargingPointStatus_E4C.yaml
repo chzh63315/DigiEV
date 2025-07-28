@@ -72,56 +72,53 @@ ChargingPointStatus:
         model: https://schema.org/Text
         type: Property
     
-    # Real-time Operating Data
-    operatingData:
-      description: Current operating parameters of the point
-      properties:
-        currentPowerOutput:
-          description: Current power output in kW
-          minimum: 0
-          type: number
-          x-ngsi:
-            model: https://schema.org/Number
-            type: Property
-            units: kW
-        currentVoltage:
-          description: Current output voltage in V
-          minimum: 0
-          type: number
-          x-ngsi:
-            model: https://schema.org/Number
-            type: Property
-            units: V
-        currentCurrent:
-          description: Current output current in A
-          minimum: 0
-          type: number
-          x-ngsi:
-            model: https://schema.org/Number
-            type: Property
-            units: A
-        powerFactor:
-          description: Current power factor
-          maximum: 1
-          minimum: 0
-          type: number
-          x-ngsi:
-            model: https://schema.org/Number
-            type: Property
-        efficiency:
-          description: Current operating efficiency percentage
-          maximum: 100
-          minimum: 0
-          type: number
-          x-ngsi:
-            model: https://schema.org/Number
-            type: Property
-            units: percent
-      type: object
-      x-ngsi:
-        model: https://schema.org/Object
-        type: Property   
- 
+      # Real-time Operating Data
+      currentPowerOutput:
+        description: Current power output in kW
+        minimum: 0
+        type: number
+        x-ngsi:
+          model: https://schema.org/Number
+          type: Property
+          units: kW
+
+      currentVoltage:
+        description: Current output voltage in V
+        minimum: 0
+        type: number
+        x-ngsi:
+          model: https://schema.org/Number
+          type: Property
+          units: V
+
+      currentCurrent:
+        description: Current output current in A
+        minimum: 0
+        type: number
+        x-ngsi:
+          model: https://schema.org/Number
+          type: Property
+          units: A
+
+      powerFactor:
+        description: Current power factor
+        maximum: 1
+        minimum: 0
+        type: number
+        x-ngsi:
+          model: https://schema.org/Number
+          type: Property
+
+      efficiency:
+        description: Current operating efficiency percentage
+        maximum: 100
+        minimum: 0
+        type: number
+        x-ngsi:
+          model: https://schema.org/Number
+          type: Property
+          units: percent          
+
   required:
     - id
     - type

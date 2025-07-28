@@ -1,4 +1,6 @@
+
 ORION_URL = "http://localhost:1026"
+
 NGSI_LD_ENDPOINT = f"{ORION_URL}/ngsi-ld/v1/entities"
 MINTAKA_URL = "http://localhost:8080"
 
