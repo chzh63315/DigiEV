@@ -9,3 +9,5 @@ headers = {
         'Accept': 'application/ld+json',
         'Link': '<https://raw.githubusercontent.com/chzh63315/DigiEV/refs/heads/main/contexts/datamodels.context-ngsi.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
     }
+
+QL_NOTIFY="http://localhost:8668/ngsi-ld/v1/notify"
