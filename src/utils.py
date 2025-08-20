@@ -1,24 +1,29 @@
 
 import requests
-from src.config import ORION_URL, NGSI_LD_ENDPOINT, headers
+from src.config import ORION_URL, NGSI_LD_ENDPOINT, headers,QL_NOTIFY,QL_URL
 
 # Check Orion Context Broker version
 def test_connection():
-    """Check if Orion Context Broker is accessible"""
-    try:
-        # Send GET request to version endpoint
-        response = requests.get(f"{ORION_URL}/version")
-        print(f"Status Code: {response.status_code}")
-        
-        if response.status_code == 200:
-            version_info = response.json()
-            print(f"Orion Version: {version_info.get('orion version', 'Unknown')}")
-            print(f"Orion-LD Version: {version_info.get('orionld version', 'Unknown')}")
-        else:
-            print("Failed to connect to Orion")
-            
-    except Exception as e:
-        print(f"Connection error: {e}")
+    """Check if Orion Context Broker and QuantumLeap are accessible"""
+    
+    def check_service(name, url, endpoint):
+        try:
+            response = requests.get(f"{url}/{endpoint}")
+            if response.status_code == 200:
+                print(f"{name}: Connected")
+                return True
+            else:
+                print(f"✗ {name}: Failed (Status: {response.status_code})")
+                return False
+        except Exception as e:
+            print(f"{name}: Error - {e}")
+            return False
+    
+    # Test services
+    orion_ok = check_service("Orion", ORION_URL, "version")
+    ql_ok = check_service("QuantumLeap", QL_URL, "health")
+    
+    return orion_ok and ql_ok
 
 
 # def function for entity query test

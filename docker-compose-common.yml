@@ -3,10 +3,10 @@ version: '3'
 services:
 
   orion:
-    image: fiware/orion:${ORION_VERSION:-3.3.1}
+    image: fiware/orion-ld:1.4.0
     ports:
       - "1026:1026"
-    command: -logLevel DEBUG -noCache -dbhost mongo
+    command: -logLevel DEBUG -dbhost mongo
     healthcheck:
       test: ["CMD", "curl", "-f", "http://0.0.0.0:1026/version"]
       interval: 1m
