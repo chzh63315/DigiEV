@@ -1,0 +1,94 @@
+\chapter{Introduction}\label{chap1}
+
+\section{The Challenge of Electric Vehicle Transition}
+
+The global transition toward electric mobility represents one of the most significant technological and societal shifts in modern transportation history~\cite{iea2023global}. While electric vehicles (EVs) offer substantial environmental benefits and reduced dependence on fossil fuels~\cite{knobloch2020net}, their widespread adoption faces numerous interconnected challenges that extend far beyond vehicle manufacturing.
+
+The primary obstacles include infrastructure deployment at scale, energy grid integration, charging network optimization, and the coordination of multiple stakeholders across the mobility ecosystem~\cite{tu2019extreme,zhang2018pev}. Traditional approaches to infrastructure planning often lack the real-time adaptability and predictive capabilities necessary to manage the complex interactions between energy supply, user demand, and system performance~\cite{shareef2016review}. These challenges are particularly acute in densely populated areas where energy demands are high and space for infrastructure deployment is limited~\cite{morrissey2016future}.
+
+France presents a particularly compelling case study for electric mobility transition. The country has committed to ambitious environmental goals, including the phase-out of internal combustion engine vehicle sales by 2040 and achieving carbon neutrality by 2050~\cite{french2020national}. As of 2024, France operates one of Europe's most extensive public charging networks, with over 100,000 charging points deployed nationwide~\cite{avere2024barometre}.
+
+However, the French charging infrastructure faces specific challenges related to grid integration, given the country's heavy reliance on nuclear power (approximately 70\% of electricity production) and growing renewable energy capacity~\cite{rte2023electricity}. The temporal mismatch between electricity production patterns and charging demand creates opportunities for optimization but also requires sophisticated management systems~\cite{lefloch2019optimal}. Additionally, the diversity of urban and rural deployment contexts across French territories necessitates adaptable infrastructure solutions that can respond to varying demographic and geographic conditions~\cite{funke2019how}.
+
+\section{Research and Development Questions}
+
+The complexity of EV charging infrastructure management has given rise to several critical research questions in the intersection of smart cities, energy systems, and digital technologies~\cite{grieves2014digital,rasheed2020digital}:
+
+\begin{enumerate}
+    \item \textbf{System Modeling and Simulation}: How can we create accurate digital representations of charging infrastructure that capture the dynamic interactions between energy supply, user behavior, and network performance?~\cite{zhang2021digital}
+    
+    \item \textbf{Data Integration and Interoperability}: How can heterogeneous data sources from energy providers, charging operators, and users be integrated into coherent, actionable information systems?~\cite{fiware2023ngsi}
+    
+    \item \textbf{Predictive Analytics}: How can machine learning and statistical modeling techniques improve forecasting of charging demand and system performance under various scenarios?~\cite{ahmad2018optimal}
+    
+    \item \textbf{Real-time Optimization}: How can digital twin technologies enable real-time decision-making for charging network management and energy distribution?~\cite{tao2019digital}
+\end{enumerate}
+
+\section{Research Focus and Methodology}
+
+This internship project focuses specifically on the development of a digital twin platform for electric vehicle charging infrastructure simulation. The research addresses the fundamental question of how to create scalable, standards-compliant digital representations of charging networks that can support both operational management and strategic planning.
+
+The approach centers on leveraging FIWARE technology as the core platform, implementing NGSI-LD standards for semantic interoperability, and utilizing modern database technologies (MongoDB and CrateDB) for efficient data management. The methodology emphasizes the creation of RESTful API interfaces to ensure system integration capabilities and external accessibility.
+
+\section{Work Carried Out}
+
+During this six-month internship at Laboratoire Ville Mobilité Transport, the primary objective was to design, develop, and validate a comprehensive digital twin system for EV charging infrastructure. The work involved several interconnected phases:
+
+\textbf{Platform Architecture Design}: Development of a scalable system architecture based on FIWARE components, ensuring compliance with NGSI-LD standards for data modeling and semantic interoperability.
+
+\textbf{Backend Implementation}: Configuration and optimization of dual database systems using MongoDB for document storage and CrateDB for time-series data analysis, enabling efficient handling of both static infrastructure data and dynamic operational metrics.
+
+\textbf{API Development}: Creation of comprehensive RESTful API interfaces using Python, providing standardized access points for data ingestion, query operations, and external system integration.
+
+\textbf{Simulation Framework}: Implementation of charging station operation simulation capabilities, incorporating energy consumption patterns, user behavior modeling, and infrastructure performance metrics.
+
+\textbf{Validation and Testing}: Comprehensive testing of system functionality, performance evaluation, and validation against real-world charging infrastructure data.
+
+\section{Internship Objectives}
+
+\subsection{Scientific and Technical Skills}
+
+The internship aimed to develop expertise in several critical areas of modern digital infrastructure development:
+
+\begin{itemize}
+    \item \textbf{Database Management}: Mastery of both document-oriented (MongoDB) and time-series (CrateDB) database technologies, including data modeling, query optimization, and performance tuning.
+    \item \textbf{API Development}: Proficiency in designing and implementing RESTful APIs using Python, including authentication, data validation, and documentation practices.
+    \item \textbf{Frontend Development}: Skills in creating user interfaces for data visualization and system interaction, enhancing the accessibility of complex technical systems.
+    \item \textbf{Standards Implementation}: Deep understanding of NGSI-LD and FIWARE technologies, critical for interoperable IoT and smart city applications.
+    \item \textbf{Data Modeling}: Expertise in semantic data modeling and the representation of complex real-world systems in digital formats.
+\end{itemize}
+
+\subsection{Soft Skills and Professional Development}
+
+Beyond technical competencies, the internship emphasized the development of research and professional skills:
+
+\begin{itemize}
+    \item \textbf{Literature Review and Analysis}: Systematic approach to scientific literature review, critical analysis of existing research, and identification of knowledge gaps.
+    \item \textbf{Technical Documentation}: Proficiency in creating clear, comprehensive documentation for complex technical systems.
+    \item \textbf{Project Management}: Experience in managing a multi-phase technical project with defined deliverables and timelines.
+    \item \textbf{Interdisciplinary Communication}: Ability to communicate technical concepts across different domains, from computer science to energy systems and urban planning.
+\end{itemize}
+
+\section{Report Structure}
+
+This report provides a comprehensive account of the digital twin development process and its outcomes. Following this introduction, Chapter~\ref{chap:literature} presents the theoretical foundations and literature review that informed the project approach. Chapter~\ref{chap:methodology} details the system architecture and implementation methodology. Chapter~\ref{chap:development} discusses the development process, technical challenges encountered, and solutions implemented. Chapter~\ref{chap:results} presents the validation results and performance evaluation of the developed system. Finally, Chapter~\ref{chap:conclusion} concludes with a critical assessment of the work completed, its contributions to the field, and perspectives for future development.
+
+The report aims to serve both as a technical reference for digital twin implementation in charging infrastructure contexts and as a reflection on the research and development process in the rapidly evolving field of smart mobility systems.
+
+\subsection{Titre de la sous-section}
+
+\begin{itemize}
+    \item[--] Exemples de citations : \cite{goodfellow2016deep} \cite{higham2019deep} \cite{openai2024chatgpt}
+    \item[--] Exemple URL : \url{https://www.centrale-mediterranee.fr/fr}
+    \item[--] Référence à une section : Cf. section~\ref{chap1}
+\end{itemize}
+
+\subsubsection{Titre de la sous-sous-section}
+\begin{itemize}
+    \item[--] Guide \textsc{Overleaf} : \url{https://www.overleaf.com/learn}
+    \item[--] Notes de bas de page\footnote{Auteur du template : Vincent \textsc{G.}}
+\end{itemize}
+
+
+
+

@@ -1,0 +1,164 @@
+\chapter{Quelques commandes utiles}\label{chap2}
+
+\section{Inclure des images}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{example-image-a}
+    \caption{\textbf{Titre.} \lipsum[1][1-5]}
+    \label{fig:image1}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.35\textwidth]{example-image-a}
+    \includegraphics[width=0.35\textwidth]{example-image-b}
+    \caption{\textbf{Titre.} \lipsum[1][1-5]}
+    \label{fig:image2}
+\end{figure}
+
+
+
+\section{Listes et tableaux}
+
+\textbf{Insérer une liste~:}
+\begin{itemize}
+    \item Premier niveau
+    \begin{itemize}
+        \item[(i)] Deuxième niveau
+        \item[(ii)] Un autre élément au deuxième niveau
+    \end{itemize}
+    \item Un autre élément au premier niveau
+        \begin{itemize}
+        \item[(a)] Deuxième niveau
+        \item[(b)] Un autre élément au deuxième niveau
+    \end{itemize}
+\end{itemize}
+\bigskip
+
+\textbf{Insérer un tableau simple~:} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        A & B & C & D & E & F & G & H & I & \dots \\
+        \hline
+        1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & \dots\\
+        10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & \dots \\
+        \hline
+    \end{tabular}
+    \caption{\textbf{Titre.} \lipsum[1][1-3]}
+    \label{tab:table-label}
+\end{table}
+
+\textbf{Autre style de tableau~:} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c c c c c}
+        \hline
+        \textbf{Col1} & \textbf{Col2} & \textbf{Col3} & \textbf{Col4} & \textbf{Col5} \\
+        \hline
+        1 & 2 & 3 & 4 & 5 \\
+        1 & 2 & 3 & 4 & 5 \\
+        \hline
+    \end{tabular}
+    \caption{\textbf{Titre.} \lipsum[1][1-3]}
+    \label{tab:table-label}
+\end{table}
+
+
+\section{Insertion de code Python}
+\textbf{Insérer du code en \textit{inline}~:} \texttt{print("Hello, World!")}.\\
+
+
+\textbf{Insérer du code en \textit{inline} avec coloration syntaxique~:} \mintinline{python}{print("Hello, World!")}.\\
+
+\textbf{Insérer du code en bloc avec coloration syntaxique~:} 
+\begin{minted}[bgcolor=codebg,fontsize=\small,frame=lines,linenos]{python}
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+# Example usage
+print(factorial(5))  # Output: 120
+\end{minted}
+
+
+
+\section{Expressions mathématiques}
+\subsection{Théorèmes, propositions, définitions, lemmes, demonstrations...}
+
+\begin{theorem}
+    \lipsum[1][1-4]
+\end{theorem}
+
+\begin{proof}
+    \lipsum[1][1-4]
+\end{proof}
+
+\begin{proposition}
+    \lipsum[1][1-4]
+\end{proposition}
+
+\begin{definition}
+    \lipsum[1][1-4]
+\end{definition}
+
+\begin{remark}
+    \lipsum[1][1-4]
+\end{remark}
+
+\begin{lemma}
+    \lipsum[1][1-4]
+\end{lemma}
+
+
+\subsection{Equations et calculs sur plusieurs lignes}
+
+\subsubsection*{Une simple équation}
+\begin{equation}
+    e = mc^2
+\end{equation}
+
+\subsubsection*{Une équation sur plusieurs lignes}
+\begin{equation}
+    \begin{split}
+        \mathbb{E}(aX + Y) &= \mathbb{E}(aX) + Y\\
+                           &= a\mathbb{E}(X) + Y
+    \end{split}
+\end{equation}
+
+\subsubsection*{Une équation avec plusieurs cas}
+\begin{equation}
+    u_n =
+    \begin{cases}
+        1 \text{ if } n\equiv0 \mod 2\\
+        0 \text{ if } n\equiv1 \mod 2 \\
+    \end{cases}
+\end{equation}
+
+\subsubsection*{Insérer une série de calculs}
+\begin{align*}
+    x &= 0.999\ldots \\
+    10x &= 9.999\ldots \\
+    10x - x &= 9.999\ldots - 0.999\ldots \\
+    9x &= 9 \\
+    x &= 1 \\
+    0.999\ldots &= 1
+\end{align*}
+
+\subsection{Utilisation du glossaire}
+
+\newglossaryentry{esperance}{
+    name=espérance,
+    description={Valeur moyenne théorique d'une variable aléatoire}
+}
+
+
+Référence au glossaire : \gls{esperance}.  
+
+
+
+

@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{goodfellow2016deep}
+Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
+\newblock {\em Deep Learning}.
+\newblock MIT Press, Cambridge, MA, 2016.
+
+\bibitem{higham2019deep}
+Catherine~F. Higham and Desmond~J. Higham.
+\newblock Deep learning: An introduction for applied mathematicians.
+\newblock {\em SIAM Review}, 61(4):860--891, 2019.
+
+\bibitem{openai2024chatgpt}
+OpenAI.
+\newblock Chatgpt: Optimizing language models for dialogue.
+\newblock \url{https://openai.com/blog/chatgpt}, 2024.
+\newblock Accessed: 2025-07-16.
+
+\end{thebibliography}

@@ -1,0 +1,24 @@
+\babel@toc {english}{}
+\contentsline {chapter}{Contents}{6}{section*.3}%
+\contentsline {chapter}{\chapternumberline {1}Introduction}{7}{chapter.1}%
+\contentsline {section}{\numberline {1}The Challenge of Electric Vehicle Transition}{7}{section.1.1}%
+\contentsline {section}{\numberline {2}Research and Development Questions}{7}{section.1.2}%
+\contentsline {section}{\numberline {3}Research Focus and Methodology}{8}{section.1.3}%
+\contentsline {section}{\numberline {4}Work Carried Out}{8}{section.1.4}%
+\contentsline {section}{\numberline {5}Internship Objectives}{9}{section.1.5}%
+\contentsline {subsection}{\numberline {5.1}Scientific and Technical Skills}{9}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {5.2}Soft Skills and Professional Development}{9}{subsection.1.5.2}%
+\contentsline {section}{\numberline {6}Report Structure}{9}{section.1.6}%
+\contentsline {subsection}{\numberline {6.1}Titre de la sous-section}{10}{subsection.1.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Titre de la sous-sous-section}{10}{subsubsection.1.6.1.1}%
+\contentsline {chapter}{\chapternumberline {2}Quelques commandes utiles}{11}{chapter.2}%
+\contentsline {section}{\numberline {1}Inclure des images}{11}{section.2.1}%
+\contentsline {section}{\numberline {2}Listes et tableaux}{11}{section.2.2}%
+\contentsline {section}{\numberline {3}Insertion de code Python}{12}{section.2.3}%
+\contentsline {section}{\numberline {4}Expressions mathématiques}{13}{section.2.4}%
+\contentsline {subsection}{\numberline {4.1}Théorèmes, propositions, définitions, lemmes, demonstrations...}{13}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {4.2}Equations et calculs sur plusieurs lignes}{13}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {4.3}Utilisation du glossaire}{14}{subsection.2.4.3}%
+\contentsline {appendix}{\chapternumberline {A}Annexe}{17}{appendix.A}%
+\contentsline {chapter}{Bibliography}{19}{appendix*.12}%
+\contentsfinish 
