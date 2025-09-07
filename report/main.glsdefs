@@ -1,6 +1,4 @@
-\ifglsentryexists{esperance}{}%
-{%
-\gls@defglossaryentry{esperance}%
+\glsdefs@newdocentry{esperance}%
 {%
 name={espérance},%
 sort={espérance},%
@@ -27,4 +25,4 @@ counter={page},%
 parent={},%
 %
 }%
-}%
+
