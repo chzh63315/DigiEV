@@ -24,7 +24,8 @@ graphs via SPARQL.
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.7\textwidth]{Images/Basic_RDF_Graph.svg}
-    \caption{\textbf{An RDF graph with triple connecting:}\\ a subject, predicate, and object}
+    \caption{\textbf{An RDF graph with triple connecting}
+    }
     \label{fig:RDF}
 \end{figure}
 
@@ -145,13 +146,6 @@ information about entities in the physical and digital world. The most
 widely used implementation is the Orion Context Broker and its
 NGSI-LD compliant extension Orion-LD.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.7\textwidth]{Images/orion.png}
-    \caption{\textbf{Orion Context Broker Architecture}}
-    \label{fig:orion}
-\end{figure}
-
 The FIWARE Next Generation Service Interfaces (NGSI) define the
 standard API for context management. NGSI-LD, standardized by ETSI
 (European Telecommunications Standards Institute) in 2019, extends
@@ -164,6 +158,14 @@ capacity, current load), and its relationships (e.g., connected to a power
 grid or located in a district). The Context Broker exposes these entities
 via a publish–subscribe API, allowing real-time updates and
 notifications.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Images/NGSI-LD-Architecture-Interactions.svg.png}
+    \caption{\textbf{NGSI-LD Architecture Interactions} \\
+    Context Consumer retrieves information through queries or subscriptions, Context Producer creates, updates, and deletes entity data, Context Broker serves as the primary access point that aggregates and returns data, Context Source stores data and announces available data types to the Registry Server, and Registry Server records data types from each Source to help the Broker discover required information.}
+    \label{fig:orion}
+\end{figure}
 
 The strengths of FIWARE and NGSI-LD lie in their ability to handle
 \emph{dynamic context} at scale. Through the Context Broker,
@@ -192,10 +194,10 @@ integration layers.
 \section{Internship Challenges and Contribution}
 
 The analysis of related frameworks highlights that Brick, WoT, and
-FIWARE/NGSI-LD each address different layers of interoperability.
+FIWARE each address different layers of interoperability.
 Brick provides a static ontology for building metadata, WoT enables
 device-level interoperability via standard Web interfaces, and
-FIWARE/NGSI-LD offers a scalable framework for dynamic context
+FIWARE offers a scalable framework for dynamic context
 management in smart environments. Table~\ref{tab:comparison}
 summarizes their origins, strengths, and limitations.
 
@@ -272,7 +274,7 @@ contrast, FIWARE and its NGSI-LD standard are designed for
 real-time, cross-domain interoperability and have already been
 adopted in numerous European smart city and energy projects.
 
-Given that this research is funded within the European context, FIWARE/NGSI-LD is a natural choice as it is an EU
+Given that this research is funded within the European context, FIWARE is a natural choice as it is an EU
 initiative, standardized by ETSI, and actively supported by the FIWARE
 Foundation. Beyond alignment with funding priorities, FIWARE is also
 technically best suited for the EV charging scenario, as it provides the
@@ -280,38 +282,42 @@ necessary dynamic context management, integration of IoT data, and
 publish–subscribe mechanisms required for real-time infrastructure
 simulation.
 
-\textbf{Challenges.} Despite these advantages, several research
-challenges must be addressed:
+Although FIWARE has proven effective
+for smart city applications, some \textbf{challenges} remain. Its modeling focus is typically on the
+city-wide or district scale (e.g., mobility services, energy demand). As such, the standard provides limited
+support for station-level modeling that captures the detailed behavior
+of individual EV charging station. This gap is critical, since station
+operations involve specific characteristics such as connector types,
+charging session dynamics, user behavior, and local grid interactions
+that cannot be fully expressed through generic NGSI-LD entities.
+Bridging this gap requires extending FIWARE-based models with
+domain-specific concepts that can describe charging stations with
+sufficient granularity. Without such refinements, digital twins built on
+FIWARE risk losing fidelity at the level most relevant to operational
+optimization.
+
+This internship \textbf{contributes} to addressing the above challenges by:
 \begin{itemize}
-  \item \emph{Heterogeneous data sources:} EV charging systems involve
-  multiple actors (vehicles, stations, grid, users) that produce data in
-  diverse formats, requiring semantic harmonization.
-  \item \emph{Dynamic context management:} Unlike static building
-  systems, charging infrastructure generates highly dynamic data such
-  as charging sessions, user arrivals, and fluctuating grid loads, which
-  must be represented in real time.
-  \item \emph{Cross-domain interoperability:} Integration across energy,
-  mobility, and urban systems demands models that can capture
-  relationships beyond the device or building level.
-  \item \emph{Scalability and performance:} Digital twins for large-scale
-  charging networks must support efficient storage, querying, and
-  notification mechanisms under high data volume.
+  \item Extending FIWARE from its traditional smart city
+  scope to the \emph{charging station level}, enriching the model with
+  entities and attributes that capture the operational details of EVSEs
+  (Electric Vehicle Supply Equipment).
+  \item Developing NGSI-LD compliant data models based on \emph{real
+  data} collected from the E4C campus, ensuring that the digital twin
+  framework reflects actual charging patterns, station utilization, and
+  grid impacts.
+  \item Implementing these models within the FIWARE ecosystem,
+  centered on the Orion-LD Context Broker, and integrating them with
+  supporting components for storage, monitoring, and simulation.
+  \item Demonstrating how the refined FIWARE-based digital twin can
+  provide actionable insights at the station level, supporting deployment
+  strategies, demand forecasting, and operational optimization.
+  \item Showing that the proposed approach is \emph{scalable and
+  generalizable}, as the methodology applied to the E4C campus can
+  be transferred to other campuses, districts, or urban areas to enable
+  more detailed and interoperable EV charging infrastructure modeling.
 \end{itemize}
 
-\textbf{Contributions.} Building on this motivation, the main
-contributions of this work are as follows:
-\begin{itemize}
-  \item Design and implementation of a digital twin framework for EV
-  charging infrastructure based on FIWARE and NGSI-LD.
-  \item Development of NGSI-LD compliant data models that capture
-  both charging station characteristics and user behavior in dynamic
-  contexts.
-  \item Integration of databases and APIs for real-time monitoring,
-  simulation, and analysis of charging infrastructure performance.
-  \item Demonstration of how the proposed platform can support
-  deployment strategies, demand forecasting, and optimization of EV
-  charging networks.
-\end{itemize}
 
 
 
